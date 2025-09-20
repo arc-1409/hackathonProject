@@ -5,19 +5,23 @@ import inquirer from "inquirer";
 import chalk from "chalk";
 import figlet from "figlet";
 
-const { program } = require("commander");
+const commander = require("commander");
+const program = new commander.Command();
 
 program 
     .version("1.0.0")
     .name("first-cli")
     .description("test for hackathon")
     .option("-p, --premier <type>", "premier league")
+    .option("-tot, --tottenham", "tottenham")
     .option("-l, --laliga <type>", "la liga")
     .option("-c, --ucl <type>", "champions league")
+    .option("-r, --report", "report")
 
 program.parse(process.argv);
 
-
+const options = program.opts();
+if (options.premier)
 
 
 /*
