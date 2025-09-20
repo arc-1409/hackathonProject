@@ -13,83 +13,58 @@ program
     .name("first-cli")
     .description("test for hackathon")
     .option("-p, --premier <type>", "premier league")
-    .option("-tot, --tottenham", "tottenham")
     .option("-l, --laliga <type>", "la liga")
-    .option("-c, --ucl <type>", "champions league")
     .option("-r, --report", "report")
+    //Premier League teams
+    .option("-afc, --arsenal", "Premier League")
+    .option("-avl, --astonvilla", "Premier League")
+    .option("-bou, --bournemouth", "Premier League")
+    .option("-bre, --brentford", "Premier League")
+    .option("-bha, --brighton", "Premier League")
+    .option("-che, --chelsea", "Premier League")
+    .option("-cry, --crystalpalace", "Premier League")
+    .option("-eve, --everton", "Premier League")
+    .option("-ful, --fulham", "Premier League")
+    .option("-ips, --ipswich", "Premier League")
+    .option("-lei, --leicester", "Premier League")
+    .option("-liv, --liverpool", "Premier League")
+    .option("-mci, --mancity", "Premier League")
+    .option("-mun, --manutd", "Premier League")
+    .option("-new, --newcastle", "Premier League")
+    .option("-nfo, --nottinghamforest", "Premier League")
+    .option("-sou, --southampton", "Premier League")
+    .option("-tot, --tottenham", "Premier League")
+    .option("-whu, --westham", "Premier League")
+    .option("-wol, --wolves", "Premier League")
+    //Laliga teams
+    .option("-alv, --alaves", "La Liga")
+    .option("-alm, --almeria", "La Liga")
+    .option("-ath, --athletic", "La Liga")
+    .option("-atm, --atleticomadrid", "La Liga")
+    .option("-bar, --barcelona", "La Liga")
+    .option("-bet, --betis", "La Liga")
+    .option("-cel, --celtavigo", "La Liga")
+    .option("-get, --getafe", "La Liga")
+    .option("-gir, --girona", "La Liga")
+    .option("-gra, --granada", "La Liga")
+    .option("-lpa, --laspalmas", "La Liga")
+    .option("-leg, --leganes", "La Liga")
+    .option("-mlc, --mallorca", "La Liga")
+    .option("-osa, --osasuna", "La Liga")
+    .option("-ray, --rayo", "La Liga")
+    .option("-rma, --realmadrid", "La Liga")
+    .option("-rso, --realsociedad", "La Liga")
+    .option("-sev, --sevilla", "La Liga")
+    .option("-val, --valencia", "La Liga")
+    .option("-vll, --valladolid", "La Liga");
+
+
 
 program.parse(process.argv);
 
 const options = program.opts();
 
-const premierTeams = {
-  ARS: "Arsenal",
-  AVL: "Aston Villa",
-  BOU: "Bournemouth",
-  BRE: "Brentford",
-  BHA: "Brighton & Hove Albion",
-  CHE: "Chelsea",
-  CRY: "Crystal Palace",
-  EVE: "Everton",
-  FUL: "Fulham",
-  IPS: "Ipswich Town",
-  LEI: "Leicester City",
-  LIV: "Liverpool",
-  MCI: "Manchester City",
-  MUN: "Manchester United",
-  NEW: "Newcastle United",
-  NFO: "Nottingham Forest",
-  SOU: "Southampton",
-  TOT: "Tottenham Hotspur",
-  WHU: "West Ham United",
-  WOL: "Wolverhampton Wanderers",
-};
 
-const laligaTeams = {
-  ALV: "Alaves",
-  ALM: "Almeria",
-  ATH: "Athletic Club (Bilbao)",
-  ATM: "Atletico Madrid",
-  BAR: "Barcelona",
-  BET: "Real Betis",
-  CEL: "Celta Vigo",
-  GET: "Getafe",
-  GIR: "Girona",
-  GRA: "Granada",
-  LPA: "Las Palmas",
-  LEG: "Leganes",
-  MLL: "Mallorca",
-  OSA: "Osasuna",
-  RAY: "Rayo Vallecano",
-  RMA: "Real Madrid",
-  RSO: "Real Sociedad",
-  SEV: "Sevilla",
-  VAL: "Valencia",
-  VLL: "Valladolid",
-};
-
-const uclTeams = {
-  ARS: "Arsenal",
-  ATL: "Atletico Madrid",
-  BAR: "Barcelona",
-  BAY: "Bayern Munich",
-  BEN: "Benfica",
-  BVB: "Borussia Dortmund",
-  CHE: "Chelsea",
-  INT: "Inter Milan",
-  JUV: "Juventus",
-  LIV: "Liverpool",
-  MCI: "Manchester City",
-  MUN: "Manchester United",
-  MIL: "AC Milan",
-  NAP: "Napoli",
-  PSG: "Paris Saint-Germain",
-  RMA: "Real Madrid",
-  RBL: "RB Leipzig",
-  POR: "Porto",
-  SEV: "Sevilla",
-  TOT: "Tottenham Hotspur",
-};
 
 function findTeam(input, teams) {
   const code = input.toUpperCase();
