@@ -14,7 +14,6 @@ program
     .description("test for hackathon")
     .option("-p, --premier <type>", "premier league")
     .option("-l, --laliga <type>", "la liga")
-    .option("-r, --report", "report")
     //Premier League teams
     .option("-afc, --arsenal", "Arsenal")
     .option("-avl, --astonvilla", "Aston Villa")
