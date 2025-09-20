@@ -1,6 +1,6 @@
 const puppeteer = require("puppeteer");
 
-async function getPositionPrem(teamName, tagged) {
+async function getPositionPrem(teamName, tagged = null) {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
@@ -30,7 +30,7 @@ async function getPositionPrem(teamName, tagged) {
     }
 }
 
-async function getPositionLaLiga(teamName, tagged) {
+async function getPositionLaLiga(teamName, tagged = null) {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
