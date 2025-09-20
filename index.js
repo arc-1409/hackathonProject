@@ -8,6 +8,11 @@ import figlet from "figlet";
 const commander = require("commander");
 const program = new commander.Command();
 
+const teamMap = {
+    premier: "Premier League",
+    laliga: "La Liga"
+}
+
 program 
     .version("1.0.0")
     .name("first-cli")
@@ -60,8 +65,6 @@ program
 program.parse(process.argv);
 
 const options = program.opts();
-
-const options = program.opts();
 if (options.help) {
     console.log(`
 === FootballWatcher User Guide ===
@@ -81,6 +84,11 @@ For more information, visit the GitHub page: https://github.com/arc-1409/Footbal
         `);
 }
 
+for (const key in options) {
+    if(options[key] === true && key != "help" && !(key in teamMap)) {
+        getPositionPrem(teamMap.key);
+    }
+}
 
 /*
 console.log(
