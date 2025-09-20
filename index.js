@@ -7,11 +7,6 @@ import figlet from "figlet";
 
 const commander = require("commander");
 const program = new commander.Command();
-const inquirer = require("inquirer");
-const options = program.opts();
-const chalk = require("chalk");
-const figlet = require("figlet");
-const { getPositionPrem, getPositionLaLiga, getFullPrem, getFullLaLiga } = require("./app");
 
 program 
     .version("1.0.0")
@@ -62,11 +57,29 @@ program
     .option("-val, --valencia", "Valencia")
     .option("-vil, --villarreal", "Villarreal");
 
+program.parse(process.argv);
 
+const options = program.opts();
 
-    program.parse(process.argv);
-        
+const options = program.opts();
+if (options.help) {
+    console.log(`
+=== FootballWatcher User Guide ===
 
+Commands: 
+    -h, --help              User guide
+    -p, --premier <type>    Premier League tag, must include team tag after
+    -l, --laliga <type>     La Liga tag, must include team tag after
+
+Team tags are three-letter codes of the team or the full name with no space. Refer to: https://liaison.reuters.com/tools/sports-team-codes 
+   
+Team Tag examples: 
+    -bar, --barcelona       Barcelona
+    -rma, --realmadrid      Real Madrid
+
+For more information, visit the GitHub page: https://github.com/arc-1409/FootballWatcher.git 
+        `);
+}
 
 
 /*
