@@ -18,7 +18,7 @@ program
     .name("first-cli")
     .description("test for hackathon")
     .option("-l, --league <type>", "league name")
-    .option("-t, --team <type>", "team name)
+    .option("-t, --team <type>", "team name")
 
 const leagueList = {
     prem: "Premier League",
