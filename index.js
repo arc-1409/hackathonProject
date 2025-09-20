@@ -11,10 +11,20 @@ program
     .version("1.0.0")
     .name("first-cli")
     .description("test for hackathon")
+    .option("-p, --premier <type>", "premier league")
+    .option("-l, --laliga <type>", "la liga")
+    .option("-c, --ucl <type>", "champions league")
 
+program.parse(process.argv);
+
+
+
+
+/*
 console.log(
     chalk.magenta(figlet.textSync("CLI DEMO", { horizontalLayout:"full" }))
 );
+
 
 const promptMode = [
     {
@@ -58,7 +68,7 @@ const promptTeam = [
         }
     }
 ];
+*/
 
 
-program.parse(process.argv);
 
