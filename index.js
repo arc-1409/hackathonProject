@@ -91,6 +91,15 @@ const uclTeams = {
   TOT: "Tottenham Hotspur",
 };
 
+function findTeam(input, teams) {
+  const code = input.toUpperCase();
+  if (teams[code]) return teams[code];
+  const match = Object.values(teams).find(
+    (t) => t.toLowerCase() === input.toLowerCase()
+  );
+  return match || input;
+}
+
 if (options.premier)
 
 
