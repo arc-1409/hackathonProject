@@ -1,126 +1,172 @@
+#!/usr/bin/env node
 const inquirer = require("inquirer");
 const puppeteer = require("puppeteer");
 
-async function getPositionPrem(teamName, tagged) {
-  const browser = await puppeteer.launch();
+const LEAGUE_URLS = {
+  "Premier League": "https://www.bbc.com/sport/football/premier-league/table",
+  "La Liga": "https://www.bbc.com/sport/football/spanish-la-liga/table",
+};
+
+let _browser;
+async function getBrowser() {
+  if (_browser && (await _browser.process())) return _browser;
+  _browser = await puppeteer.launch({
+    headless: "new",
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
+  return _browser;
+}
+
+async function maybeDismissConsent(page) {
   try {
-    const page = await browser.newPage();
-    await page.goto("https://www.bbc.com/sport/football/premier-league/table", { waitUntil: "networkidle2" });
-    await page.waitForSelector("table tbody tr");
-
-    const teamsList = await page.$$eval("table tbody tr", rows =>
-      rows.map(row => {
-        const position = row.querySelector("td:first-child")?.textContent.trim();
-        const name = row.querySelector("td:nth-child(2)")?.textContent.trim();
-        return { position, name };
-      })
+    await page.waitForSelector(
+      'button[aria-label*="Consent"], button[aria-label*="Agree"], button:has-text("I agree")',
+      { timeout: 2000 }
     );
-
-    const team = teamsList.find(t => t.name?.toLowerCase() === teamName.toLowerCase());
-
-    if (tagged) {
-      if (team) console.log(`${team.name} is currently in position ${team.position} in the Premier League.`);
-      else console.log(`${teamName} is not in the Premier League.`);
-    } else if (team) {
-      console.log(`${team.name} is currently in position ${team.position} in the Premier League.`);
-    }
-  } finally {
-    await browser.close();
+    await page.click(
+      'button[aria-label*="Consent"], button[aria-label*="Agree"], button:has-text("I agree")'
+    );
+  } catch {
   }
 }
 
-async function getPositionLaLiga(teamName, tagged) {
-  const browser = await puppeteer.launch();
+// Core: scrape standings
+async function scrapeStandings(url) {
+  const browser = await getBrowser();
+  const page = await browser.newPage();
   try {
-    const page = await browser.newPage();
-    await page.goto("https://www.bbc.com/sport/football/spanish-la-liga/table", { waitUntil: "networkidle2" });
-    await page.waitForSelector("table tbody tr");
+    await page.setUserAgent(
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome Safari"
+    );
+    await page.goto(url, { waitUntil: "networkidle2", timeout: 45_000 });
+    await maybeDismissConsent(page);
+    await page.waitForSelector("table tbody tr", { timeout: 15_000 });
 
-    const teamsList = await page.$$eval("table tbody tr", rows =>
-      rows.map(row => {
-        const position = row.querySelector("td:first-child")?.textContent.trim();
-        const name = row.querySelector("td:nth-child(2)")?.textContent.trim();
-        return { position, name };
-      })
+    // Detect which column has team names
+    const nameColIndex = await page.$$eval("table thead tr th", (ths) => {
+      const idx = ths.findIndex((th) =>
+        /team|club|name/i.test((th.textContent || "").trim())
+      );
+      return idx >= 0 ? idx : 1;
+    });
+
+    const rows = await page.$$eval(
+      "table tbody tr",
+      (trs, nameIdx) => {
+        const out = [];
+        for (const tr of trs) {
+          const tds = Array.from(tr.querySelectorAll("td"));
+          if (!tds.length) continue;
+          const position = (tds[0]?.textContent || "").trim();
+          const name = (tds[nameIdx]?.textContent || "").trim();
+          if (position && name) out.push({ position, name });
+        }
+        return out;
+      },
+      nameColIndex
     );
 
-    const team = teamsList.find(t => t.name?.toLowerCase() === teamName.toLowerCase());
-
-    if (tagged) {
-      if (team) console.log(`${team.name} is currently in position ${team.position} in La Liga.`);
-      else console.log(`${teamName} is not in La Liga.`);
-    } else if (team) {
-      console.log(`${team.name} is currently in position ${team.position} in La Liga.`);
-    }
+    return rows
+      .map((t) => ({
+        position: Number(String(t.position).replace(/\D+/g, "")),
+        name: t.name,
+      }))
+      .filter((t) => Number.isFinite(t.position) && t.name)
+      .sort((a, b) => a.position - b.position);
   } finally {
-    await browser.close();
+    await page.close().catch(() => {});
   }
 }
 
-async function getFullPrem() {
-  const browser = await puppeteer.launch();
-  try {
-    const page = await browser.newPage();
-    await page.goto("https://www.bbc.com/sport/football/premier-league/table", { waitUntil: "networkidle2" });
-    await page.waitForSelector("table tbody tr");
-
-    const teamsList = await page.$$eval("table tbody tr", rows =>
-      rows.map(row => {
-        const position = row.querySelector("td:first-child")?.textContent.trim();
-        const name = row.querySelector("td:nth-child(2)")?.textContent.trim();
-        return { position, name };
-      })
-    );
-
-    console.log("Premier League Standings:");
-    teamsList.forEach(t => console.log(`${t.position}. ${t.name}`));
-  } finally {
-    await browser.close();
-  }
+// --------- Public helpers (case-insensitive) ----------
+async function getFull(leagueName) {
+  const url = LEAGUE_URLS[leagueName];
+  if (!url) throw new Error(`Unsupported league: ${leagueName}`);
+  return await scrapeStandings(url);
 }
 
-async function getFullLaLiga() {
-  const browser = await puppeteer.launch();
-  try {
-    const page = await browser.newPage();
-    await page.goto("https://www.bbc.com/sport/football/spanish-la-liga/table", { waitUntil: "networkidle2" });
-    await page.waitForSelector("table tbody tr");
+async function getPosition(leagueName, teamName) {
+  const table = await getFull(leagueName);
+  const query = String(teamName).trim().toLowerCase();
 
-    const teamsList = await page.$$eval("table tbody tr", rows =>
-      rows.map(row => {
-        const position = row.querySelector("td:first-child")?.textContent.trim();
-        const name = row.querySelector("td:nth-child(2)")?.textContent.trim();
-        return { position, name };
-      })
-    );
-
-    console.log("La Liga Standings:");
-    teamsList.forEach(t => console.log(`${t.position}. ${t.name}`));
-  } finally {
-    await browser.close();
+  const row = table.find((r) => r.name.toLowerCase() === query);
+  if (row) {
+    return { found: true, league: leagueName, team: row.name, position: row.position };
   }
+
+  // Suggestions if not found
+  const suggestions = table
+    .map((r) => r.name)
+    .filter((n) => n.toLowerCase().includes(query))
+    .slice(0, 3);
+
+  return { found: false, league: leagueName, team: teamName, suggestions };
 }
 
+// --------- CLI flow ----------
 async function askLeague() {
   const { league } = await inquirer.prompt([
-    { type: "list", name: "league", message: "Which league are you finding?", choices: ["Premier League", "La Liga"] }
+    { type: "list", name: "league", message: "Which league are you finding?", choices: Object.keys(LEAGUE_URLS) },
   ]);
 
   const { specific } = await inquirer.prompt([
-    { type: "confirm", name: "specific", message: "Are you looking for a specific team?", default: true }
+    { type: "confirm", name: "specific", message: "Are you looking for a specific team?", default: true },
   ]);
 
   if (specific) {
     const { team } = await inquirer.prompt([
-      { type: "input", name: "team", message: "Enter the team name:" }
+      {
+        type: "input",
+        name: "team",
+        message: "Enter the team name (case does not matter):",
+      },
     ]);
-
-    if (league === "Premier League") await getPositionPrem(team, true);
-    else await getPositionLaLiga(team, true);
+    const res = await getPosition(league, team);
+    if (res.found) {
+      console.log(`${res.team} is currently in position ${res.position} in ${res.league}.`);
+    } else {
+      const extra =
+        res.suggestions && res.suggestions.length
+          ? ` Did you mean: ${res.suggestions.join(", ")}?`
+          : "";
+      console.log(`Couldn't find "${res.team}" in ${res.league}.${extra}`);
+    }
   } else {
-    if (league === "Premier League") await getFullPrem();
-    else await getFullLaLiga();
+    const table = await getFull(league);
+    console.log(`${league} Standings:`);
+    table.forEach((t) => console.log(`${t.position}. ${t.name}`));
   }
 }
 
-module.exports = { askLeague, getPositionPrem, getPositionLaLiga, getFullPrem, getFullLaLiga };
+// --------- Convenience exports ----------
+async function getFullPrem() {
+  return getFull("Premier League");
+}
+async function getFullLaLiga() {
+  return getFull("La Liga");
+}
+async function getPositionPrem(teamName) {
+  return getPosition("Premier League", teamName);
+}
+async function getPositionLaLiga(teamName) {
+  return getPosition("La Liga", teamName);
+}
+
+// Run directly
+if (require.main === module) {
+  askLeague()
+    .catch((err) => console.error("[error]", err?.message || err))
+    .finally(async () => {
+      try {
+        if (_browser) await _browser.close();
+      } catch {}
+    });
+}
+
+module.exports = {
+  askLeague,
+  getFullPrem,
+  getFullLaLiga,
+  getPositionPrem,
+  getPositionLaLiga,
+};
