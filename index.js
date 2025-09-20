@@ -17,50 +17,56 @@ program
     .version("1.0.0")
     .name("first-cli")
     .description("test for hackathon")
-    .option("-p, --premier <type>", "premier league")
-    .option("-l, --laliga <type>", "la liga")
-    //Premier League teams
-    .option("-afc, --arsenal", "Arsenal")
-    .option("-avl, --astonvilla", "Aston Villa")
-    .option("-bou, --bournemouth", "AFC Bournemouth")
-    .option("-bre, --brentford", "Brentford")
-    .option("-bha, --brighton", "Brighton & Hove Albion")
-    .option("-che, --chelsea", "Chelsea")
-    .option("-cry, --crystalpalace", "Crystal Palace")
-    .option("-eve, --everton", "Everton")
-    .option("-ful, --fulham", "Fulham")
-    .option("-liv, --liverpool", "Liverpool")
-    .option("-lee, --leeds", "Leeds United")
-    .option("-mci, --mancity", "Manchester City")
-    .option("-mun, --manutd", "Manchester United")
-    .option("-new, --newcastle", "Newcastle United")
-    .option("-nfo, --nottinghamforest", "Nottingham Forest")
-    .option("-sou, --southampton", "Southhampton")
-    .option("-sun, --sunderland", "Sunderland")
-    .option("-tot, --tottenham", "Tottenham Hostpur")
-    .option("-whu, --westham", "West Ham United")
-    .option("-wol, --wolves", "Wolverhampton Wanderers")
-    //Laliga teams
-    .option("-alv, --alaves", "Alavés")
-    .option("-ath, --athletic", "Athletic Club")
-    .option("-atm, --atleticomadrid", "Atletico Madrid")
-    .option("-bar, --barcelona", "Barcelona")
-    .option("-bet, --betis", "Real Betis")
-    .option("-cel, --celtavigo", "Celta Vigo")
-    .option("-esp, --espanyol", "Espanyol")
-    .option("-elc, --elche", "Elche")
-    .option("-get, --getafe", "Getafe")
-    .option("-gir, --girona", "Girona")
-    .option("-lev, --levante", "Levante)
-    .option("-mlc, --mallorca", "Mallorca")
-    .option("-osa, --osasuna", "Osasuna")
-    .option("-ovi, --oviedo", "Real Oviedo")
-    .option("-ray, --rayo", "Rayo Vallecano")
-    .option("-rma, --realmadrid", "Real Madrid")
-    .option("-rso, --realsociedad", "Real Sociedad")
-    .option("-sev, --sevilla", "Sevilla")
-    .option("-val, --valencia", "Valencia")
-    .option("-vil, --villarreal", "Villarreal");
+    .option("-l, --league <type>", "league name")
+    .option("-t, --team <type>", "team name)
+
+const leagueList = {
+    prem: "Premier League",
+    laliga: "La Liga"
+};
+
+const teamList = {
+    ars: "Arsenal",
+    avl: "Aston Villa", 
+    bou: "AFC Bournemouth",
+    bre: "Brentford",
+    bha: "Brighton & Hove Albion",
+    che: "Chelsea",
+    cry: "Crystal Palace",
+    eve: "Everton",
+    ful: "Fulham",
+    liv: "Liverpool",
+    lee: "Leeds United",
+    mci: "Manchester City",
+    mun: "Manchester United",
+    new: "Newcastle United",
+    nfo: "Nottingham Forest",
+    sou: "Southampton",
+    sun: "Sunderland",
+    tot: "Tottenham Hotspur",
+    whu: "West Ham United",
+    wol: "Wolverhampton Wanderers",
+    alv: "Alavés",
+    ath: "Athletic Club",
+    atm: "Atletico Madrid",
+    bar: "Barcelona",
+    bet: "Real Betis",
+    cel: "Celta Vigo", 
+    esp: "Espanyol",
+    elc: "Elche",
+    get: "Getafe",
+    gir: "Girona",
+    lev: "Levante",
+    mlc: "Mallorca",
+    osa: "Osasuna",
+    ovi: "Real Oviedo",
+    ray: "Rayo Vallecano",
+    rma: "Real Madrid",
+    rso: "Real Sociedad",
+    sev: "Sevilla",
+    val: "Valencia",
+    vil: "Villarreal"
+};
 
 program.parse(process.argv);
 
@@ -71,24 +77,20 @@ if (options.help) {
 
 Commands: 
     -h, --help              User guide
-    -p, --premier <type>    Premier League tag, must include team tag after
-    -l, --laliga <type>     La Liga tag, must include team tag after
+    -l, --league <type>     League tag, must include league name after; optional
+    -t, --team <type>       Team tag, must include team tag after
 
-Team tags are three-letter codes of the team or the full name with no space. Refer to: https://liaison.reuters.com/tools/sports-team-codes 
+Team names are three-letter codes of the team. Refer to: https://liaison.reuters.com/tools/sports-team-codes 
    
 Team Tag examples: 
-    -bar, --barcelona       Barcelona
-    -rma, --realmadrid      Real Madrid
+    bar                     Barcelona
+    rma                     Real Madrid
 
 For more information, visit the GitHub page: https://github.com/arc-1409/FootballWatcher.git 
         `);
 }
 
-for (const key in options) {
-    if(options[key] === true && key != "help" && !(key in teamMap)) {
-        getPositionPrem(teamMap.key);
-    }
-}
+
 
 /*
 console.log(
