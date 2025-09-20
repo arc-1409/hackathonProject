@@ -7,6 +7,11 @@ import figlet from "figlet";
 
 const commander = require("commander");
 const program = new commander.Command();
+const inquirer = require("inquirer");
+const options = program.opts();
+const chalk = require("chalk");
+const figlet = require("figlet");
+const { getPositionPrem, getPositionLaLiga, getFullPrem, getFullLaLiga } = require("./app");
 
 program 
     .version("1.0.0")
@@ -59,22 +64,65 @@ program
 
 
 
-program.parse(process.argv);
+    program.parse(process.argv);
+        
+    
+    
+    function findTeam(input, teams) {
+      const code = input.toUpperCase();
+      if (teams[code]) return teams[code];
+      const match = Object.values(teams).find(
+        (t) => t.toLowerCase() === input.toLowerCase()
+      );
+      return match || input;
+    }
+    
+    const { getPositionPrem, getPositionLaLiga, getFullPrem, getFullLaLiga } = require("./app");
+    
+    async function askLeague() {
+      const { league } = await inquirer.prompt([
+        {
+          type: "list",
+          name: "league",
+          message: "Which league are you finding?",
+          choices: ["Premier League", "La Liga"]
+        }
+      ]);
+    
+      const { specific } = await inquirer.prompt([
+        {
+          type: "confirm",
+          name: "specific",
+          message: "Are you looking for a specific team?",
+          default: true
+        }
+      ]);
+    
+      if (specific) {
+        const { team } = await inquirer.prompt([
+          {
+            type: "input",
+            name: "team",
+            message: "Enter the team name:"
+          }
+        ]);
+    
+        if (league === "Premier League") {
+          await getPositionPrem(team, true);
+        } else {
+          await getPositionLaLiga(team, true);
+        }
+      } else {
+        if (league === "Premier League") {
+          await getFullPrem();
+        } else {
+          await getFullLaLiga();
+        }
+      }
+    }
+    
+    askLeague();
 
-const options = program.opts();
-
-
-
-function findTeam(input, teams) {
-  const code = input.toUpperCase();
-  if (teams[code]) return teams[code];
-  const match = Object.values(teams).find(
-    (t) => t.toLowerCase() === input.toLowerCase()
-  );
-  return match || input;
-}
-
-if (options.premier)
 
 
 /*
