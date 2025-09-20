@@ -1,180 +1,126 @@
-#!/usr/bin/env node
-
-import {program} from "commander";
-import inquirer from "inquirer";
-import chalk from "chalk";
-import figlet from "figlet";
-
-const commander = require("commander");
-const program = new commander.Command();
 const inquirer = require("inquirer");
-const options = program.opts();
-const chalk = require("chalk");
-const figlet = require("figlet");
-const { getPositionPrem, getPositionLaLiga, getFullPrem, getFullLaLiga } = require("./app");
+const puppeteer = require("puppeteer");
 
-program 
-    .version("1.0.0")
-    .name("first-cli")
-    .description("test for hackathon")
-    .option("-p, --premier <type>", "premier league")
-    .option("-l, --laliga <type>", "la liga")
-    .option("-r, --report", "report")
-    //Premier League teams
-    .option("-afc, --arsenal", "Arsenal")
-    .option("-avl, --astonvilla", "Aston Villa")
-    .option("-bou, --bournemouth", "AFC Bournemouth")
-    .option("-bre, --brentford", "Brentford")
-    .option("-bha, --brighton", "Brighton & Hove Albion")
-    .option("-che, --chelsea", "Chelsea")
-    .option("-cry, --crystalpalace", "Crystal Palace")
-    .option("-eve, --everton", "Everton")
-    .option("-ful, --fulham", "Fulham")
-    .option("-liv, --liverpool", "Liverpool")
-    .option("-lee, --leeds", "Leeds United")
-    .option("-mci, --mancity", "Manchester City")
-    .option("-mun, --manutd", "Manchester United")
-    .option("-new, --newcastle", "Newcastle United")
-    .option("-nfo, --nottinghamforest", "Nottingham Forest")
-    .option("-sou, --southampton", "Southhampton")
-    .option("-sun, --sunderland", "Sunderland")
-    .option("-tot, --tottenham", "Tottenham Hostpur")
-    .option("-whu, --westham", "West Ham United")
-    .option("-wol, --wolves", "Wolverhampton Wanderers")
-    //Laliga teams
-    .option("-alv, --alaves", "deportivo alaves")
-    .option("-alm, --almeria", "almeria")
-    .option("-ath, --athletic", "athletic")
-    .option("-atm, --atleticomadrid", "atletico madrid")
-    .option("-bar, --barcelona", "barcelona")
-    .option("-bet, --betis", "betis")
-    .option("-cel, --celtadevigo", "celta de vigo")
-    .option("-get, --getafe", "getafe")
-    .option("-gir, --girona", "girona")
-    .option("-gra, --granada", "granada")
-    .option("-lpa, --laspalmas", "las palmas")
-    .option("-leg, --leganes", "leganés")
-    .option("-mlc, --mallorca", "mallorca")
-    .option("-osa, --osasuna", "osasuna")
-    .option("-ray, --rayo", "rayo")
-    .option("-rma, --realmadrid", "real madrid")
-    .option("-rso, --realsociedad", "real sociedad")
-    .option("-sev, --sevilla", "sevilla")
-    .option("-val, --valencia", "valencia")
-    .option("-vll, --valladolid", "valladolid");
+async function getPositionPrem(teamName, tagged) {
+  const browser = await puppeteer.launch();
+  try {
+    const page = await browser.newPage();
+    await page.goto("https://www.bbc.com/sport/football/premier-league/table", { waitUntil: "networkidle2" });
+    await page.waitForSelector("table tbody tr");
 
+    const teamsList = await page.$$eval("table tbody tr", rows =>
+      rows.map(row => {
+        const position = row.querySelector("td:first-child")?.textContent.trim();
+        const name = row.querySelector("td:nth-child(2)")?.textContent.trim();
+        return { position, name };
+      })
+    );
 
+    const team = teamsList.find(t => t.name?.toLowerCase() === teamName.toLowerCase());
 
-    program.parse(process.argv);
-        
-    
-    
-    function findTeam(input, teams) {
-      const code = input.toUpperCase();
-      if (teams[code]) return teams[code];
-      const match = Object.values(teams).find(
-        (t) => t.toLowerCase() === input.toLowerCase()
-      );
-      return match || input;
+    if (tagged) {
+      if (team) console.log(`${team.name} is currently in position ${team.position} in the Premier League.`);
+      else console.log(`${teamName} is not in the Premier League.`);
+    } else if (team) {
+      console.log(`${team.name} is currently in position ${team.position} in the Premier League.`);
     }
-    
-    const { getPositionPrem, getPositionLaLiga, getFullPrem, getFullLaLiga } = require("./app");
-    
-    async function askLeague() {
-      const { league } = await inquirer.prompt([
-        {
-          type: "list",
-          name: "league",
-          message: "Which league are you finding?",
-          choices: ["Premier League", "La Liga"]
-        }
-      ]);
-    
-      const { specific } = await inquirer.prompt([
-        {
-          type: "confirm",
-          name: "specific",
-          message: "Are you looking for a specific team?",
-          default: true
-        }
-      ]);
-    
-      if (specific) {
-        const { team } = await inquirer.prompt([
-          {
-            type: "input",
-            name: "team",
-            message: "Enter the team name:"
-          }
-        ]);
-    
-        if (league === "Premier League") {
-          await getPositionPrem(team, true);
-        } else {
-          await getPositionLaLiga(team, true);
-        }
-      } else {
-        if (league === "Premier League") {
-          await getFullPrem();
-        } else {
-          await getFullLaLiga();
-        }
-      }
+  } finally {
+    await browser.close();
+  }
+}
+
+async function getPositionLaLiga(teamName, tagged) {
+  const browser = await puppeteer.launch();
+  try {
+    const page = await browser.newPage();
+    await page.goto("https://www.bbc.com/sport/football/spanish-la-liga/table", { waitUntil: "networkidle2" });
+    await page.waitForSelector("table tbody tr");
+
+    const teamsList = await page.$$eval("table tbody tr", rows =>
+      rows.map(row => {
+        const position = row.querySelector("td:first-child")?.textContent.trim();
+        const name = row.querySelector("td:nth-child(2)")?.textContent.trim();
+        return { position, name };
+      })
+    );
+
+    const team = teamsList.find(t => t.name?.toLowerCase() === teamName.toLowerCase());
+
+    if (tagged) {
+      if (team) console.log(`${team.name} is currently in position ${team.position} in La Liga.`);
+      else console.log(`${teamName} is not in La Liga.`);
+    } else if (team) {
+      console.log(`${team.name} is currently in position ${team.position} in La Liga.`);
     }
-    
-    askLeague();
+  } finally {
+    await browser.close();
+  }
+}
 
+async function getFullPrem() {
+  const browser = await puppeteer.launch();
+  try {
+    const page = await browser.newPage();
+    await page.goto("https://www.bbc.com/sport/football/premier-league/table", { waitUntil: "networkidle2" });
+    await page.waitForSelector("table tbody tr");
 
+    const teamsList = await page.$$eval("table tbody tr", rows =>
+      rows.map(row => {
+        const position = row.querySelector("td:first-child")?.textContent.trim();
+        const name = row.querySelector("td:nth-child(2)")?.textContent.trim();
+        return { position, name };
+      })
+    );
 
-/*
-console.log(
-    chalk.magenta(figlet.textSync("CLI DEMO", { horizontalLayout:"full" }))
-);
+    console.log("Premier League Standings:");
+    teamsList.forEach(t => console.log(`${t.position}. ${t.name}`));
+  } finally {
+    await browser.close();
+  }
+}
 
+async function getFullLaLiga() {
+  const browser = await puppeteer.launch();
+  try {
+    const page = await browser.newPage();
+    await page.goto("https://www.bbc.com/sport/football/spanish-la-liga/table", { waitUntil: "networkidle2" });
+    await page.waitForSelector("table tbody tr");
 
-const promptMode = [
-    {
-        type: "list",
-        name: "mode prompt",
-        message: "seek it out and ye shall find.",
-        choices: [
-            "league table lookup",
-            "team position lookup",
-            "future match lookup"
-        ]
-    }
-];
+    const teamsList = await page.$$eval("table tbody tr", rows =>
+      rows.map(row => {
+        const position = row.querySelector("td:first-child")?.textContent.trim();
+        const name = row.querySelector("td:nth-child(2)")?.textContent.trim();
+        return { position, name };
+      })
+    );
 
-const promptLeague = [
-    {
-        type: "list",
-        name: "league prompt",
-        message: "pick a league: ",
-        choices: [
-            "premier league",
-            "la liga",
-            "uefa champions leauge"
-        ]
-    }
-];
+    console.log("La Liga Standings:");
+    teamsList.forEach(t => console.log(`${t.position}. ${t.name}`));
+  } finally {
+    await browser.close();
+  }
+}
 
-const promptTeam = [
-    {
-        type: "input",
-        name: "team prompt",
-        message: "enter any team on the premier league, laliga, or champions league: ",
-        validate(team) {
-            if(!team) {
-                return "Enter a team name."
-            }
-            if(team.notOntTable()) {
-                return "Enter a team that's actually on the table."
-            }
-            return true;
-        }
-    }
-];
-*/
+async function askLeague() {
+  const { league } = await inquirer.prompt([
+    { type: "list", name: "league", message: "Which league are you finding?", choices: ["Premier League", "La Liga"] }
+  ]);
 
+  const { specific } = await inquirer.prompt([
+    { type: "confirm", name: "specific", message: "Are you looking for a specific team?", default: true }
+  ]);
 
+  if (specific) {
+    const { team } = await inquirer.prompt([
+      { type: "input", name: "team", message: "Enter the team name:" }
+    ]);
 
+    if (league === "Premier League") await getPositionPrem(team, true);
+    else await getPositionLaLiga(team, true);
+  } else {
+    if (league === "Premier League") await getFullPrem();
+    else await getFullLaLiga();
+  }
+}
+
+module.exports = { askLeague, getPositionPrem, getPositionLaLiga, getFullPrem, getFullLaLiga };
