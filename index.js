@@ -21,6 +21,76 @@ program
 program.parse(process.argv);
 
 const options = program.opts();
+
+const premierTeams = {
+  ARS: "Arsenal",
+  AVL: "Aston Villa",
+  BOU: "Bournemouth",
+  BRE: "Brentford",
+  BHA: "Brighton & Hove Albion",
+  CHE: "Chelsea",
+  CRY: "Crystal Palace",
+  EVE: "Everton",
+  FUL: "Fulham",
+  IPS: "Ipswich Town",
+  LEI: "Leicester City",
+  LIV: "Liverpool",
+  MCI: "Manchester City",
+  MUN: "Manchester United",
+  NEW: "Newcastle United",
+  NFO: "Nottingham Forest",
+  SOU: "Southampton",
+  TOT: "Tottenham Hotspur",
+  WHU: "West Ham United",
+  WOL: "Wolverhampton Wanderers",
+};
+
+const laligaTeams = {
+  ALV: "Alaves",
+  ALM: "Almeria",
+  ATH: "Athletic Club (Bilbao)",
+  ATM: "Atletico Madrid",
+  BAR: "Barcelona",
+  BET: "Real Betis",
+  CEL: "Celta Vigo",
+  GET: "Getafe",
+  GIR: "Girona",
+  GRA: "Granada",
+  LPA: "Las Palmas",
+  LEG: "Leganes",
+  MLL: "Mallorca",
+  OSA: "Osasuna",
+  RAY: "Rayo Vallecano",
+  RMA: "Real Madrid",
+  RSO: "Real Sociedad",
+  SEV: "Sevilla",
+  VAL: "Valencia",
+  VLL: "Valladolid",
+};
+
+const uclTeams = {
+  ARS: "Arsenal",
+  ATL: "Atletico Madrid",
+  BAR: "Barcelona",
+  BAY: "Bayern Munich",
+  BEN: "Benfica",
+  BVB: "Borussia Dortmund",
+  CHE: "Chelsea",
+  INT: "Inter Milan",
+  JUV: "Juventus",
+  LIV: "Liverpool",
+  MCI: "Manchester City",
+  MUN: "Manchester United",
+  MIL: "AC Milan",
+  NAP: "Napoli",
+  PSG: "Paris Saint-Germain",
+  RMA: "Real Madrid",
+  RBL: "RB Leipzig",
+  POR: "Porto",
+  SEV: "Sevilla",
+  TOT: "Tottenham Hotspur",
+};
+
 if (options.premier)
 
 
