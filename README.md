@@ -29,7 +29,7 @@ npm install
 ## Usage
 
 ```bash
-node footballwatcher.js [options]
+node index.js [options]
 ```
 
 ### Team name input
