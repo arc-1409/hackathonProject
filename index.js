@@ -71,6 +71,9 @@ const teamList = {
 program.parse(process.argv);
 
 const options = program.opts();
+const league = options.leagueList;
+const team = options.teamList;
+
 if (options.help) {
     console.log(`
 === FootballWatcher User Guide ===
