@@ -35,6 +35,10 @@ npm install
 node footballwatcher.js [options]
 ```
 
+### Team name input
+
+All team name inputs are in the format of the team's three-letter code. Refer to [this link](https://liaison.reuters.com/tools/sports-team-codes) for the team name codes.
+
 ### Example commands
 
 ```bash
