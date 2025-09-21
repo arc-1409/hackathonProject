@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 
 import {program} from "commander";
-import inquirer from "inquirer";
-import chalk from "chalk";
-import figlet from "figlet";
+import puppeteer from "puppeteer";
+import { getPositionPrem, getPositionLaLiga } from "./apps.js";
 
 const commander = require("commander");
 const program = new commander.Command();
@@ -95,11 +94,18 @@ const leagueName = leagueList[league];
 const team = options.team;
 const teamName = teamList[team];
 
-// pass to functions in app.js
-if(leagueName === "Premier League") {
-    getPositionPrem(teamName); } 
-else if (leagueName === "La Liga") {
-    getPositionLaLiga(teamName); } 
-else {
-    getPositionPrem(teamName);
-    getPositionLaLiga(teamName); }
+asynch function main() {
+    const browser = await puppeteer.launch({ headless: true });
+
+    // pass to functions in app.js
+    if(leagueName === "Premier League") {
+        getPositionPrem(teamName); } 
+    else if (leagueName === "La Liga") {
+        getPositionLaLiga(teamName); } 
+    else {
+        getPositionPrem(teamName);
+        getPositionLaLiga(teamName); }
+    await browser.close();
+}
+
+main(); 
