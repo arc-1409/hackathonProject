@@ -2,7 +2,6 @@
 
 import {program} from "commander";
 import puppeteer from "puppeteer";
-import chalk from "chalk";
 import { getPositionPrem, getPositionLaLiga } from "./apps.js";
 
 program 
@@ -110,20 +109,6 @@ async function main() {
         else {
             await getPositionPrem(page, teamName);
             await getPositionLaLiga(page, teamName); }
-
-        if(teamName === "Tottenham Hotspur") {
-            console.log(bold("COYS!"));
-        }
-        if(teamName === "Barcelona") {
-            const redWord = chalk.red("Visca ");
-            const blueWord = chalk.blue("Barca");
-            console.log(bold(`${redWord} ${blueWord}`)); 
-        }
-        if(teamName === "Real Madrid") {
-            const purpleWord = chalk.purple("Hala ");
-            const whiteWord = chalk.bgWhite("Madrid");
-            console.log(`${purpleWord} ${whiteWord}`); 
-        }
         
         await page.close();
         await browser.close();
