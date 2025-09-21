@@ -111,7 +111,7 @@ async function main() {
             await getPositionPrem(page, teamName);
             await getPositionLaLiga(page, teamName); }
 
-        if(teamName === "Tottenham Hostpur") {
+        if(teamName === "Tottenham Hotspur") {
             console.log(bold("COYS!"));
         }
         if(teamName === "Barcelona") {
