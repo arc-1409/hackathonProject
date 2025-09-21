@@ -1,6 +1,6 @@
 const puppeteer = require("puppeteer");
 
-async function getPositionPrem(teamName, tagged = null) {
+async function getPositionPrem(teamName) {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
@@ -17,16 +17,11 @@ async function getPositionPrem(teamName, tagged = null) {
 
     const team = teamsList.find(t => t.name?.toLowerCases() === teamName.toLowerCase());
 
-    if(tagged) {
-        if(team) {
-            console.log("${team.name} is currently in position ${team.position} on the premier league.");
-        } else {
-            console.lot("${team.name} is not on Premier League.");
-        }
-    } else {
-        if(team) {
-            console.log("${team.name} is currently in position ${team.position} on the premier league.");
-        }
+    if(team) {
+        console.log("${team.name} is currently in position ${team.position} on the premier league.");
+    } 
+    else {
+        console.lot("${team.name} is not on Premier League.");
     }
 }
 
@@ -47,15 +42,8 @@ async function getPositionLaLiga(teamName, tagged = null) {
 
     const team = teamsList.find(t => t.name?.toLowerCases() === teamName.toLowerCase());
 
-    if(tagged) {
-        if(team) {
-            console.log("${team.name} is currently in position ${team.position} in la liga.");
-        } else {
-            console.lot("${team.name} is not in la liga.");
-        }
-    } else {
-        if(team) {
-            console.log("${team.name} is currently in position ${team.position} in la liga.");
-        }
-    }
+    if(team) {
+        console.log("${team.name} is currently in position ${team.position} in la liga."); } 
+    else {
+        console.lot("${team.name} is not in la liga."); } 
 }
