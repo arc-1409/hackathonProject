@@ -38,16 +38,18 @@ node footballwatcher.js [options]
 ### Example commands
 
 ```bash
-node footballwatcher.js --team "Manchester United"
+node footballwatcher.js -l premier -t bar
+node footballwatcher.js -t rma
 node footballwatcher.js --live
 node footballwatcher.js --help
 ```
 
 ## Options
 
-- `--team <name>`: Track a specific football team
+- `-l, --league <name>`: Identify the league
+- `-t, --team <name>`: Track a specific football team
 - `--live`: Show live matches
-- `--help`: Show usage instructions
+- `-h, --help`: Show usage instructions
 
 ## Contributing
 
