@@ -1,8 +1,6 @@
 const puppeteer = require("puppeteer");
 
-async function getPositionPrem(browser, teamName) {
-    const page = await browser.newPage();
-
+async function getPositionPrem(page, teamName) {
     await page.goto("https://www.bbc.com/sport/football/premier-league/table", { waitUntil: "networkidle2"});
     await page.waitForSelector("table tbody tr");
 
@@ -26,9 +24,7 @@ async function getPositionPrem(browser, teamName) {
     await page.close();
 }
 
-async function getPositionLaLiga(browser, teamName) {
-    const page = await browser.newPage();
-
+async function getPositionLaLiga(page, teamName) {
     await page.goto("https://www.bbc.com/sport/football/spanish-la-liga/table", { waitUntil: "networkidle2"});
     await page.waitForSelector("table tbody tr");
 
