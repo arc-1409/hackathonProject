@@ -81,7 +81,6 @@ Team Tag examples:
 
 For more information, visit the GitHub page: https://github.com/arc-1409/FootballWatcher.git 
         `);
-}
 
 program.parse(process.argv);
 
