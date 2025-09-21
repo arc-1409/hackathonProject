@@ -1,7 +1,6 @@
 const puppeteer = require("puppeteer");
 
-async function getPositionPrem(teamName) {
-    const browser = await puppeteer.launch();
+async function getPositionPrem(browser, teamName) {
     const page = await browser.newPage();
 
     await page.goto("https://www.bbc.com/sport/football/premier-league/table", { waitUntil: "networkidle2"});
@@ -9,23 +8,23 @@ async function getPositionPrem(teamName) {
 
     const teamsList = await page.$$eval("table tbody tr", rows => {
         return rows.map(row => {
-            const position = row.querySelector("td:first-child")?.textContent.trim();
-            const name = row.querySelector("td:team")?.textContent.trim();
+            const position = row.querySelector("td.first-child")?.textContent.trim();
+            const name = row.querySelector("td.team")?.textContent.trim();
             return { position, name };
         });
     });
 
-    const team = teamsList.find(t => t.name?.toLowerCases() === teamName.toLowerCase());
+    const team = teamsList.find(t => t.name?.toLowerCase() === teamName.toLowerCase());
 
     if(team) {
-        console.log("${team.name} is currently in position ${team.position} on the premier league.");
+        console.log(`${team.name} is currently in position ${team.position} on the premier league.`);
     } 
     else {
-        console.lot("${team.name} is not on Premier League.");
+        console.log(`${team.name} is not on Premier League.`);
     }
 }
 
-async function getPositionLaLiga(teamName, tagged = null) {
+async function getPositionLaLiga(browser, teamName) {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
@@ -34,8 +33,8 @@ async function getPositionLaLiga(teamName, tagged = null) {
 
     const teamsList = await page.$$eval("table tbody tr", rows => {
         return rows.map(row => {
-            const position = row.querySelector("td:first-child")?.textContent.trim();
-            const name = row.querySelector("td:team")?.textContent.trim();
+            const position = row.querySelector("td.first-child")?.textContent.trim();
+            const name = row.querySelector("td.team")?.textContent.trim();
             return { position, name };
         });
     });
@@ -43,7 +42,7 @@ async function getPositionLaLiga(teamName, tagged = null) {
     const team = teamsList.find(t => t.name?.toLowerCases() === teamName.toLowerCase());
 
     if(team) {
-        console.log("${team.name} is currently in position ${team.position} in la liga."); } 
+        console.log(`${team.name} is currently in position ${team.position} in la liga.`); } 
     else {
-        console.lot("${team.name} is not in la liga."); } 
+        console.lot(`${team.name} is not in la liga.`); } 
 }
