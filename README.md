@@ -5,7 +5,7 @@ author: Lulu, William, Edward
 
 # FootballWatcher
 
-A terminal-based tool for tracking football matches and updates right from your command line.
+A CLI application for tracking football matches and updates right in your terminal. Inspired by the team's lifelong love of European football, this project aims to provide easy and aesthetic access of live football information using code. The application is written entirely in Javascript and with Node.js. Tools such as commander, inquirer, chalk, figlet, and puppeteer were used. As of now, we've only included two football leagues: Premier League and La Liga, but more will be added in the future. 
 
 ## Features
 
