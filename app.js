@@ -8,7 +8,7 @@ async function getPositionPrem(browser, teamName) {
 
     const teamsList = await page.$$eval("table tbody tr", rows => {
         return rows.map(row => {
-            const position = row.querySelector("td.first-child")?.textContent.trim();
+            const position = row.querySelector("td:first-child")?.textContent.trim();
             const name = row.querySelector("td.team")?.textContent.trim();
             return { position, name };
         });
@@ -34,7 +34,7 @@ async function getPositionLaLiga(browser, teamName) {
 
     const teamsList = await page.$$eval("table tbody tr", rows => {
         return rows.map(row => {
-            const position = row.querySelector("td.first-child")?.textContent.trim();
+            const position = row.querySelector("td:first-child")?.textContent.trim();
             const name = row.querySelector("td.team")?.textContent.trim();
             return { position, name };
         });
