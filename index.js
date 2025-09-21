@@ -7,6 +7,7 @@ import figlet from "figlet";
 
 const commander = require("commander");
 const program = new commander.Command();
+const options = program.opts();
 
 const teamMap = {
     premier: "Premier League",
@@ -68,21 +69,6 @@ const teamList = {
     vil: "Villarreal"
 };
 
-program.parse(process.argv);
-
-const options = program.opts();
-const league = options.leagueList;
-const team = options.teamList;
-
-// pass to functions in app.js
-if(league === premier) {
-    getPositionPrem(team); } 
-else if (league === laliga) {
-    getPositionLaLiga(team); } 
-else {
-    getPositionPrem(team);
-    getPositionLaLiga(team); }
-
 if (options.help) {
     console.log(`
 === FootballWatcher User Guide ===
@@ -101,6 +87,24 @@ Team Tag examples:
 For more information, visit the GitHub page: https://github.com/arc-1409/FootballWatcher.git 
         `);
 }
+
+program.parse(process.argv);
+
+const league = options.league;
+const leagueName = leagueList[league];
+const team = options.team;
+const teamName = teamList[team];
+
+// pass to functions in app.js
+if(leagueName === "Premier League") {
+    getPositionPrem(teamName); } 
+else if (leagueName === "La Liga") {
+    getPositionLaLiga(teamName); } 
+else {
+    getPositionPrem(teamName);
+    getPositionLaLiga(teamName); }
+
+
 
 
 
