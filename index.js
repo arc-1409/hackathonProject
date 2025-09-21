@@ -6,7 +6,6 @@ import { getPositionPrem, getPositionLaLiga } from "./apps.js";
 
 const commander = require("commander");
 const program = new commander.Command();
-const options = program.opts();
 
 const teamMap = {
     premier: "Premier League",
@@ -68,8 +67,8 @@ const teamList = {
     vil: "Villarreal"
 };
 
-if (options.help) {
-    console.log(`
+// --help is built in; this is customized
+program.addHelpText(`beforeAll,` `
 ================================ FootballWatcher User Guide ================================
 
 Commands: 
@@ -89,13 +88,24 @@ For more information, visit the GitHub page: https://github.com/arc-1409/Footbal
 
 program.parse(process.argv);
 
+const options = program.opts(); // must be after parsing
+
 // take user value (not the flag), search the value in the map, make const variable for value
 const league = options.league;
 const leagueName = leagueList[league];
 const team = options.team;
 const teamName = teamList[team];
 
-asynch function main() {
+// error messages
+if (!teamName) {
+    console.log(`ERROR: Unknown team code ${team}`); 
+    process.exit(1); } 
+if (teamName && !leagueName) {
+    console.log(`Error: Unknown league name ${league}`); 
+    process.exit(1); }
+
+// main
+async function main() {
     const browser = await puppeteer.launch({ headless: true });
 
     // pass to functions in app.js
