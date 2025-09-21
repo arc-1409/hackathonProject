@@ -2,7 +2,9 @@
 
 import {program} from "commander";
 import puppeteer from "puppeteer";
-import { getPositionPrem, getPositionLaLiga } from "./apps.js";
+import chalk from "chalk";
+import figlet from "figlet";
+import { getPositionPrem, getPositionLaLiga } from "./app.js";
 
 program 
     .version("1.0.0")
@@ -87,6 +89,10 @@ const leagueName = leagueList[league];
 const team = options.team;
 const teamName = teamList[team];
 
+const terminalWidth = process.stdout.columns;
+const line = "-";
+const horizontal = line.repeat(terminalWidth);
+
 // error messages
 if (!teamName) {
     console.log(`ERROR: Unknown team code ${team}`); 
@@ -97,6 +103,10 @@ if (league && !leagueName) {
 
 // main
 async function main() {
+    console.log(horizontal);
+    console.log(chalk.yellow(figlet.textSync("FootballWatcher", {horizontalLayout:"full"})) );
+    console.log(horizontal);
+
     try {
         const browser = await puppeteer.launch({ headless: true });
         const page = await browser.newPage();
@@ -110,6 +120,25 @@ async function main() {
             await getPositionPrem(page, teamName);
             await getPositionLaLiga(page, teamName); }
         
+        if(teamName === "Tottenham Hostpur") {
+            console.log("COYS!");
+        }
+        if(teamName === "Barcelona") {
+            const redWord = chalk.red("y visca");
+            const blueWord = chalk.blue("catalunya!");
+            const visca = figlet.textSync("Visca");
+            const barca = figlet.textSync("Barca!");
+            console.log(chalk.red(figlet.textSync("Visca", {horizontalLayout:"full"})));
+            console.log(chalk.blue(figlet.textSync("Barca", {horizontalLayout:"full"})));
+            console.log(`${redWord} ${blueWord}`); 
+        }
+        if(teamName === "Real Madrid") {
+            const yellowWord = chalk.yellow("Hala Madrid!");
+            console.log(`${yellowWord}`); 
+        }
+
+        console.log(horizontal);
+
         await page.close();
         await browser.close();
     } catch (err) {
