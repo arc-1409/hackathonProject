@@ -1,4 +1,4 @@
-const puppeteer = require("puppeteer");
+import puppeteer from "puppeteer";
 
 async function getPositionPrem(page, teamName) {
     await page.goto("https://www.bbc.com/sport/football/premier-league/table", { waitUntil: "networkidle2"});
