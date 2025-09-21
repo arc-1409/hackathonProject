@@ -65,7 +65,7 @@ const teamList = {
 };
 
 // --help is built in; this is customized
-program.addHelpText(`beforeAll`, `
+program.addHelpText("beforeAll", `
 ================================ FootballWatcher User Guide ================================
 
 Commands: 
