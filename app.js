@@ -22,14 +22,15 @@ async function getPositionPrem(page, teamName) {
     } // no need to close page; index.js does it already
 }
 
+
 async function getPositionLaLiga(page, teamName) {
     await page.goto("https://www.bbc.com/sport/football/spanish-la-liga/table", { waitUntil: "networkidle2"});
-    await page.waitForSelector("table tbody tr");
+    await page.waitForSelector("tr.ssrcss-lurqilq-CellsRow.e13j9mpy2");
 
-    const teamsList = await page.$$eval("table tbody tr", rows => {
+    const teamsList = await page.$$eval("tr.ssrcss-1urqilq-CellsRow.e13j9mpy2", rows => {
         return rows.map(row => {
-            const rank = row.querySelector("td:first-child")?.textContent.trim();
-            const name = row.querySelector("td.team")?.textContent.trim();
+            const rank = row.querySelector("span.ssrcss-4fgj5b-Rank")?.textContent.trim();
+            const name = row.querySelector("a span.visually-hidden")?.textContent.trim();
             return { rank, name };
         });
     });
