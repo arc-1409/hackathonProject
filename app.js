@@ -15,10 +15,10 @@ async function getPositionPrem(page, teamName) {
     const team = teamsList.find(t => t.name?.toLowerCase() === teamName.toLowerCase());
 
     if(team) {
-        console.log(`${team.name} is currently in position ${team.position} on the premier league.`);
+        console.log(`${teamName} is currently in position ${team.position} on the premier league.`);
     } 
     else {
-        console.log(`${team.name} is not on Premier League.`);
+        console.log(`${teamName} is not on Premier League.`);
     } // no need to close page; index.js does it already
 }
 
@@ -37,9 +37,9 @@ async function getPositionLaLiga(page, teamName) {
     const team = teamsList.find(t => t.name?.toLowerCase() === teamName.toLowerCase());
 
     if(team) {
-        console.log(`${team.name} is currently in position ${team.position} in la liga.`); } 
+        console.log(`${teamName} is currently in position ${team.position} in la liga.`); } 
     else {
-        console.log(`${team.name} is not in la liga.`); } 
+        console.log(`${teamName} is not in la liga.`); } 
 }
 
 export { getPositionPrem, getPositionLaLiga };
