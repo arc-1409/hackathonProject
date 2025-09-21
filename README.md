@@ -1,15 +1,12 @@
-# hackathonProject
-This is a hackathon project
-Hi, This is the project. 
-author: Lulu, William, Edward  
-
 # FootballWatcher
 
 A CLI application for tracking football matches and updates right in your terminal. Inspired by the team's lifelong love of European football, this project aims to provide easy and aesthetic access of live football information using code. The application is written entirely in Javascript and with Node.js. Tools such as commander, inquirer, chalk, figlet, and puppeteer were used. As of now, we've only included two football leagues: Premier League and La Liga, but more will be added in the future. 
 
+Try every team to see which teams we support! 
+
 ## Features
 
-- Get live scores and updates for football games
+- Get live ranking for football games
 - Track your favorite teams directly in the terminal
 - Simple, fast, and easy-to-use interface
 
@@ -66,3 +63,8 @@ See [LICENSE](LICENSE) for details.
 ---
 
 *FootballWatcher is an open-source project. Feel free to use, modify, and contribute!*
+
+# hackathonProject
+This is a hackathon project
+Hi, This is the project. 
+author: Lulu, William, Edward  
