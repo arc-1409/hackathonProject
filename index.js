@@ -89,6 +89,7 @@ For more information, visit the GitHub page: https://github.com/arc-1409/Footbal
 
 program.parse(process.argv);
 
+// take user value (not the flag), search the value in the map, make const variable for value
 const league = options.league;
 const leagueName = leagueList[league];
 const team = options.team;
@@ -99,12 +100,12 @@ asynch function main() {
 
     // pass to functions in app.js
     if(leagueName === "Premier League") {
-        getPositionPrem(teamName); } 
+        await getPositionPrem(browser, teamName); }  // put await to make sure one process closes before another starts
     else if (leagueName === "La Liga") {
-        getPositionLaLiga(teamName); } 
+        await getPositionLaLiga(browser, teamName); } 
     else {
-        getPositionPrem(teamName);
-        getPositionLaLiga(teamName); }
+        await getPositionPrem(browser, teamName);
+        await getPositionLaLiga(browser, teamName); }
     await browser.close();
 }
 
