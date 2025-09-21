@@ -19,9 +19,7 @@ async function getPositionPrem(page, teamName) {
     } 
     else {
         console.log(`${team.name} is not on Premier League.`);
-    }
-
-    await page.close();
+    } // no need to close page; index.js does it already
 }
 
 async function getPositionLaLiga(page, teamName) {
@@ -42,8 +40,6 @@ async function getPositionLaLiga(page, teamName) {
         console.log(`${team.name} is currently in position ${team.position} in la liga.`); } 
     else {
         console.log(`${team.name} is not in la liga.`); } 
-
-    await page.close();
 }
 
 export { getPositionPrem, getPositionLaLiga };
