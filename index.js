@@ -103,17 +103,24 @@ if (league && !leagueName) {
 
 // main
 async function main() {
-    const browser = await puppeteer.launch({ headless: true });
+    try {
+        const browser = await puppeteer.launch({ headless: true });
+        const page = await browser.newPage();
 
-    // pass to functions in app.js
-    if(leagueName === "Premier League") {
-        await getPositionPrem(browser, teamName); }  // put await to make sure one process closes before another starts
-    else if (leagueName === "La Liga") {
-        await getPositionLaLiga(browser, teamName); } 
-    else {
-        await getPositionPrem(browser, teamName);
-        await getPositionLaLiga(browser, teamName); }
-    await browser.close();
+        // pass to functions in app.js
+        if(leagueName === "Premier League") {
+            await getPositionPrem(page, teamName); }  // put await to make sure one process closes before another starts
+        else if (leagueName === "La Liga") {
+            await getPositionLaLiga(page, teamName); } 
+        else {
+            await getPositionPrem(page, teamName);
+            await getPositionLaLiga(page, teamName); }
+        
+        await page.close();
+        await browser.close();
+    } catch (err) {
+        console.error("Error: ", err);
+    }
 }
 
 main(); 
