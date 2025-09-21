@@ -74,6 +74,15 @@ const options = program.opts();
 const league = options.leagueList;
 const team = options.teamList;
 
+// pass to functions in app.js
+if(league === premier) {
+    getPositionPrem(team); } 
+else if (league === laliga) {
+    getPositionLaLiga(team); } 
+else {
+    getPositionPrem(team);
+    getPositionLaLiga(team); }
+
 if (options.help) {
     console.log(`
 === FootballWatcher User Guide ===
@@ -92,6 +101,8 @@ Team Tag examples:
 For more information, visit the GitHub page: https://github.com/arc-1409/FootballWatcher.git 
         `);
 }
+
+
 
 
 
