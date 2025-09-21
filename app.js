@@ -22,6 +22,8 @@ async function getPositionPrem(browser, teamName) {
     else {
         console.log(`${team.name} is not on Premier League.`);
     }
+
+    await page.close();
 }
 
 async function getPositionLaLiga(browser, teamName) {
@@ -45,4 +47,8 @@ async function getPositionLaLiga(browser, teamName) {
         console.log(`${team.name} is currently in position ${team.position} in la liga.`); } 
     else {
         console.lot(`${team.name} is not in la liga.`); } 
+
+    await page.close();
 }
+
+export { getPositionPrem, getPositionLaLiga };
