@@ -4,11 +4,6 @@ import {program} from "commander";
 import puppeteer from "puppeteer";
 import { getPositionPrem, getPositionLaLiga } from "./apps.js";
 
-const teamMap = {
-    premier: "Premier League",
-    laliga: "La Liga"
-}
-
 program 
     .version("1.0.0")
     .name("first-cli")
