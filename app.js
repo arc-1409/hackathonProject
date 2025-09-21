@@ -27,7 +27,6 @@ async function getPositionPrem(browser, teamName) {
 }
 
 async function getPositionLaLiga(browser, teamName) {
-    const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
     await page.goto("https://www.bbc.com/sport/football/spanish-la-liga/table", { waitUntil: "networkidle2"});
@@ -41,12 +40,12 @@ async function getPositionLaLiga(browser, teamName) {
         });
     });
 
-    const team = teamsList.find(t => t.name?.toLowerCases() === teamName.toLowerCase());
+    const team = teamsList.find(t => t.name?.toLowerCase() === teamName.toLowerCase());
 
     if(team) {
         console.log(`${team.name} is currently in position ${team.position} in la liga.`); } 
     else {
-        console.lot(`${team.name} is not in la liga.`); } 
+        console.log(`${team.name} is not in la liga.`); } 
 
     await page.close();
 }
