@@ -4,9 +4,6 @@ import {program} from "commander";
 import puppeteer from "puppeteer";
 import { getPositionPrem, getPositionLaLiga } from "./apps.js";
 
-const commander = require("commander");
-const program = new commander.Command();
-
 const teamMap = {
     premier: "Premier League",
     laliga: "La Liga"
@@ -68,7 +65,7 @@ const teamList = {
 };
 
 // --help is built in; this is customized
-program.addHelpText(`beforeAll,` `
+program.addHelpText(`beforeAll`, `
 ================================ FootballWatcher User Guide ================================
 
 Commands: 
@@ -100,7 +97,7 @@ const teamName = teamList[team];
 if (!teamName) {
     console.log(`ERROR: Unknown team code ${team}`); 
     process.exit(1); } 
-if (teamName && !leagueName) {
+if (league && !leagueName) {
     console.log(`Error: Unknown league name ${league}`); 
     process.exit(1); }
 
