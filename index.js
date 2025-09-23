@@ -7,6 +7,7 @@ import figlet from "figlet";
 import { getPositionPrem, getPositionLaLiga } from "./app.js";
 import { leagueList, teamList, positionList } from "./lexicon.js";
 
+// TODO: figure out undashed commands
 program 
     .version("1.0.0")
     .name("first-cli")
@@ -14,7 +15,7 @@ program
     .option("-l, --league <type>", "league name")
     .option("-t, --team <type>", "team name")
     .option("-c, --coach", "head coach")
-    .option("-xi, --startingxi", "starting eleven")
+    .option("--xi, --startingxi", "starting eleven") // must be double dashes for non single-character flags
     .option("-g, --g <type> <type>", "look up games")
     .option("-p, --position", "position")
 
