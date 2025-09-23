@@ -5,6 +5,7 @@ import puppeteer from "puppeteer";
 import chalk from "chalk";
 import figlet from "figlet";
 import { getPositionPrem, getPositionLaLiga } from "./app.js";
+import { leagueList, teamList, positionList } from "./lexicon.js";
 
 program 
     .version("1.0.0")
