@@ -12,6 +12,10 @@ program
     .description("test for hackathon")
     .option("-l, --league <type>", "league name")
     .option("-t, --team <type>", "team name")
+    .option("-c, --coach", "head coach")
+    .option("-xi, --startingxi", "starting eleven")
+    .option("-g, --g <type> <type>", "look up games")
+    .option("-p, --position", "position")
 
 const leagueList = {
     prem: "Premier League",
@@ -59,6 +63,26 @@ const teamList = {
     sev: "Sevilla",
     val: "Valencia",
     vil: "Villarreal"
+};
+
+const positionList = {
+    st: "striker",
+    rw: "right wing",
+    lw: "left wing",
+    cf: "centre forward",
+    rf: "right foward",
+    lf: "left forward",
+    cam: "central attacking midfielder",
+    cm: "central midfielder",
+    lm: "left midfielder",
+    rm: "right midfielder",
+    cdm: "central defensive midfielder",
+    cb: "centre back",
+    lwb: "left wing back",
+    rwb: "right wing back",
+    lb: "left back",
+    rb: "rb",
+    gk: "goalkeeper"
 };
 
 // --help is built in; this is customized
