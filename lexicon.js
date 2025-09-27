@@ -47,7 +47,27 @@ const teamList = {
     rso: "Real Sociedad",
     sev: "Sevilla",
     val: "Valencia",
-    vil: "Villarreal"
+    vil: "Villarreal", 
+
+    // german bundesliga
+    bmg: "Borussia M'gladbach",
+    bvb: "Borussia Dortmund",
+    fca: "Augsburg",
+    fcb: "Bayern Munich",
+    fcu: "Union Berlin",
+    hdh: "Heidenheim",
+    hsv: "Hamburger SV",
+    koe: "Köln",
+    lev: "Leverkusen",
+    m05: "Mainz 05",
+    rbl: "RB Leipzig",
+    tsg: "Hoffenheim",
+    scf: "Freiburg",
+    sge: "Eintracht Frankfurt",
+    stp: "St. Pauli",
+    svw: "Werder Bremen",
+    vfb: "Stuttgart",
+    wob: "Wolfsburg"
 };
 
 const positionList = {
