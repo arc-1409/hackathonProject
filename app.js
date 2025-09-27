@@ -7,7 +7,13 @@ async function getPositionPrem(page, teamName) {
     const teamsList = await page.$$eval("tr.ssrcss-1urqilq-CellsRow.e13j9mpy2", rows => {
         return rows.map(row => {
             const rank = row.querySelector("span.ssrcss-4fgj5b-Rank")?.textContent.trim();
-            const name = row.querySelector("a span.visually-hidden")?.textContent.trim();
+
+            // Try aria-hidden first, fallback to visually-hidden
+            // fix 2: try visuall-hidden, fallback to aria-hidden
+            let name = row.querySelector("span.visually-hidden")?.innerText.trim(); 
+            if (!name) {
+                name = row.querySelector("span[aria-hidden='true'][data-600]")?.getAttribute("data-600")?.trim();
+            }
             return { rank, name };
         });
     });
