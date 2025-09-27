@@ -4,7 +4,7 @@ import {program} from "commander";
 import puppeteer from "puppeteer";
 import chalk from "chalk";
 import figlet from "figlet";
-import { getPositionPrem, getPositionLaLiga, getPositionBund } from "./position.js";
+import { getPositionPrem, getPositionLaLiga, getPositionBund } from "./algorithms/position.js";
 import { leagueList, teamList, positionList } from "./lexicon.js";
 
 // TODO: figure out undashed commands
