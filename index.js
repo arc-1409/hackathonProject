@@ -14,10 +14,10 @@ program
     .description("test for hackathon")
     .option("-l, --league <type>", "league name")
     .option("-t, --team <type>", "team name")
-    .option("-c, --coach", "head coach")
+    .option("-c, --coach", "head coach") // future feature
     .option("--xi, --startingxi", "starting eleven") // must be double dashes for non single-character flags
-    .option("-g, --g <type> <type>", "look up games")
-    .option("-p, --position", "position")
+    .option("-g, --g <type> <type>", "look up games") // future feature
+    .option("-p, --position", "position") // future feature
 
 // --help is built in; this is customized
 program.addHelpText("beforeAll", `
@@ -74,9 +74,12 @@ async function main() {
             await getPositionPrem(page, teamName); }  // put await to make sure one process closes before another starts
         else if (leagueName === "La Liga") {
             await getPositionLaLiga(page, teamName); } 
+        else if (leagueName === "German Bundesliga") {
+            await getPositionBund(page, teamName); }
         else {
             await getPositionPrem(page, teamName);
-            await getPositionLaLiga(page, teamName); }
+            await getPositionLaLiga(page, teamName); 
+            await getPositionBund(page, teamName); }
         
         if(teamName === "Tottenham Hostpur") {
             console.log("COYS!");
