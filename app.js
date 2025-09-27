@@ -9,7 +9,7 @@ async function getPositionPrem(page, teamName) {
             const rank = row.querySelector("span.ssrcss-4fgj5b-Rank")?.textContent.trim();
 
             // Try aria-hidden first, fallback to visually-hidden
-            // fix 2: try visuall-hidden, fallback to aria-hidden
+            // fix 2: try visually-hidden, fallback to aria-hidden
             let name = row.querySelector("span.visually-hidden")?.innerText.trim(); 
             if (!name) {
                 name = row.querySelector("span[aria-hidden='true'][data-600]")?.getAttribute("data-600")?.trim();
@@ -38,7 +38,7 @@ async function getPositionLaLiga(page, teamName) {
             const rank = row.querySelector("span.ssrcss-4fgj5b-Rank")?.innerText.trim();
 
             // Try aria-hidden first, fallback to visually-hidden
-            // fix 2: try visuall-hidden, fallback to aria-hidden
+            // fix 2: try visually-hidden, fallback to aria-hidden
             let name = row.querySelector("span.visually-hidden")?.innerText.trim(); 
             if (!name) {
                 name = row.querySelector("span[aria-hidden='true'][data-600]")?.getAttribute("data-600")?.trim();
