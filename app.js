@@ -30,10 +30,12 @@ async function getPositionLaLiga(page, teamName) {
     const teamsList = await page.$$eval("tr[class*='CellsRow']", rows => {
         return rows.map(row => {
             const rank = row.querySelector("span.ssrcss-4fgj5b-Rank")?.innerText.trim();
-            
-            let name = row.querySelector("span[aria-hidden='true'][data-600]")?.getAttribute("data-600")?.trim();
+
+            // Try aria-hidden first, fallback to visually-hidden
+            // fix 2: try visuall-hidden, fallback to aria-hidden
+            let name = row.querySelector("span.visually-hidden")?.innerText.trim(); 
             if (!name) {
-                name = row.querySelector("span.visually-hidden")?.innerText.trim();
+                name = row.querySelector("span[aria-hidden='true'][data-600]")?.getAttribute("data-600")?.trim();
             }
             return { rank, name };
         });
