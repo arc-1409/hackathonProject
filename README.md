@@ -4,15 +4,14 @@ A CLI application for tracking football matches and updates right in your termin
 
 Try every team to see which teams we support! 
 
-## Features
+## Existing Features
 
-- Get live ranking for football games
-- Track your favorite teams directly in the terminal
-- Simple, fast, and easy-to-use interface
+- Track your football teams' live rankings in their leagues
+...and more to come in the future!
 
 ## Installation
 
-Clone the repository:
+Start by cloning the repository in your terminal:
 
 ```bash
 git clone https://github.com/arc-1409/FootballWatcher.git
@@ -49,8 +48,11 @@ node footballwatcher.js --help
 
 - `-l, --league <name>`: Identify the league
 - `-t, --team <name>`: Track a specific football team
-- `--live`: Show live matches
 - `-h, --help`: Show usage instructions
+
+## Most Recent Updates
+
+- Resolved bugs in team lookups
 
 ## Contributing
 
