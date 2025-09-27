@@ -4,9 +4,11 @@ const leagueList = {
 };
 
 const teamList = {
+    // premier league
     ars: "Arsenal",
     avl: "Aston Villa", 
     bou: "AFC Bournemouth",
+    bur: "Burnley",
     bre: "Brentford",
     bha: "Brighton & Hove Albion",
     che: "Chelsea",
@@ -24,6 +26,8 @@ const teamList = {
     tot: "Tottenham Hotspur",
     whu: "West Ham United",
     wol: "Wolverhampton Wanderers",
+
+    // la liga
     alv: "Alavés",
     ath: "Athletic Club",
     atm: "Atletico Madrid",
