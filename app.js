@@ -25,9 +25,9 @@ async function getPositionPrem(page, teamName) {
 
 async function getPositionLaLiga(page, teamName) {
     await page.goto("https://www.bbc.com/sport/football/spanish-la-liga/table", { waitUntil: "networkidle2"});
-    await page.waitForSelector("tr.ssrcss-lurqilq-CellsRow");
+    await page.waitForSelector("tr[class*='CellsRow']");
 
-    const teamsList = await page.$$eval("tr.ssrcss-1urqilq-CellsRow", rows => {
+    const teamsList = await page.$$eval("tr[class*='CellsRow']", rows => {
         return rows.map(row => {
             const rank = row.querySelector("span.ssrcss-4fgj5b-Rank")?.innerText.trim();
             
