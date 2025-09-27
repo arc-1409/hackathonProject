@@ -6,7 +6,7 @@ Try every team to see which teams we support!
 
 ## Existing Features
 
-- Track your football teams' live rankings in their leagues
+- Track your football teams' live rankings in Premier League, La Liga, and German Bundesliga
 ...and more to come in the future!
 
 ## Installation
@@ -33,7 +33,7 @@ node index.js [options]
 
 ### Team name input
 
-All team name inputs are in the format of the team's three-letter code. Refer to [this link](https://liaison.reuters.com/tools/sports-team-codes) for the team name codes.
+All team name inputs are in the format of the team's three-letter code. Refer to lexicon.js or [this link](https://liaison.reuters.com/tools/sports-team-codes) for the team name codes.
 
 ### Example commands
 
@@ -53,6 +53,7 @@ node footballwatcher.js --help
 ## Most Recent Updates
 
 - Resolved bugs in team lookups
+- Added German Bundesliga to the Lexicon
 
 ## Contributing
 
