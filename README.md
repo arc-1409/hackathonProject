@@ -7,6 +7,7 @@ Try every team to see which teams we support!
 ## Existing Features
 
 - Track your football teams' live rankings in Premier League, La Liga, and German Bundesliga
+
 ...and more to come in the future!
 
 ## Installation
