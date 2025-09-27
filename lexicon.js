@@ -1,6 +1,7 @@
 const leagueList = {
     prem: "Premier League",
-    laliga: "La Liga"
+    laliga: "La Liga",
+    bundesliga: "German Bundesliga"
 };
 
 const teamList = {
