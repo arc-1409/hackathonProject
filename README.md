@@ -14,12 +14,12 @@ Try guessing which teams we support!
 
 ## 🛠️ Tools Used
 
-1. **node.js**: javascript environment where this command line project is written on
-2. **commander.js**: a node.js library, provides definable commands and options that take user input for command line interfaces
-3. **puppeteer.js**: also a node.js library, performs web-scraping that can do a wide range of tasks on Chrome browsers including looking up information
-4. **FIGlet**: a program that makes ASCII art. we use this to stylize our application title everytime a user utilizes its functionalities
-5. **chalk**: a terminal program whose API can add colors to words, including stylized FIGlet art
-6. **inquirer.js**: another node.js library that also takes prompts, much like commander. we're working on this one!
+- **node.js**: javascript environment where this command line project is written on
+- **commander.js**: a node.js library, provides definable commands and options that take user input for command line interfaces
+- **puppeteer.js**: also a node.js library, performs web-scraping that can do a wide range of tasks on Chrome browsers including looking up information
+- **FIGlet**: a program that makes ASCII art. we use this to stylize our application title everytime a user utilizes its functionalities
+- **chalk**: a terminal program whose API can add colors to words, including stylized FIGlet art
+- **inquirer.js**: another node.js library that also takes prompts, much like commander. we're working on this one!
 
 ## 🔑 Installation
 
