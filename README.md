@@ -1,6 +1,6 @@
 # FootballWatcher
 
-A CLI application for tracking football matches and updates right in your terminal. Inspired by the team's lifelong love of European football, this project aims to provide easy and aesthetic access of live football information using code. The application is written entirely in Javascript and with Node.js. Tools such as commander, inquirer, chalk, figlet, and puppeteer were used. As of now, we've only included two football leagues: Premier League and La Liga, but more will be added in the future. 
+A CLI application for tracking football matches and updates right in your terminal. Inspired by the team's lifelong love of European football, this project aims to provide easy and aesthetic access of live football information using code. The application is written entirely in Javascript and with Node.js. As of now, we've only included two football leagues: Premier League and La Liga, but more will be added in the future. 
 
 Try every team to see which teams we support! 
 
@@ -9,6 +9,14 @@ Try every team to see which teams we support!
 - Track your football teams' live rankings in Premier League, La Liga, and German Bundesliga
 
 ...and more to come in the future!
+
+## Tools Used
+
+- node.js: javascript environment where this command line project is written on
+- commander.js: a node.js library, provides definable commands and options that take user input for command line interfaces
+- puppeteer.js: also a node.js library, performs web-scraping that can do a wide range of tasks on Chrome browsers including looking up information
+- FIGlet: a program that makes ASCII art. we use this to stylize our application title everytime a user utilizes its functionalities
+- chalk: a terminal program whose API can add colors to words, including stylized FIGlet art 
 
 ## Installation
 
