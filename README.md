@@ -4,7 +4,7 @@ A CLI application for tracking football matches and updates right in your termin
 
 Try every team to see which teams we support! 
 
-## 🔍 Existing Features
+## ✨ Existing Features
 
 - Track your football teams' live rankings in Premier League, La Liga, and German Bundesliga
 
@@ -54,13 +54,13 @@ node footballwatcher.js --live
 node footballwatcher.js --help
 ```
 
-## Options
+## 🧮 Options
 
 - `-l, --league <name>`: Identify the league
 - `-t, --team <name>`: Track a specific football team
 - `-h, --help`: Show usage instructions
 
-## Most Recent Updates
+## 🏁 Most Recent Updates
 
 - Resolved bugs in team lookups
 - Added German Bundesliga to the Lexicon
@@ -72,7 +72,7 @@ We plan to work on adding these features in the future, in no particular order y
 - Resolved bugs in team lookups
 - Added German Bundesliga to the Lexicon
 
-## Contributing
+## 🫂 Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
