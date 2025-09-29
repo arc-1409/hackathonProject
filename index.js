@@ -11,7 +11,7 @@ import { leagueList, teamList, positionList } from "./lexicon.js";
 program 
     .version("1.0.0")
     .name("first-cli")
-    .description("test for hackathon")
+    .description("test for hackathon: search for team's standing in leagues")
     .command('search-standing [league] <team>')
     .option("-l, --league <type>", "league name")
     .option("-t, --team <type>", "team name")
@@ -43,6 +43,7 @@ For more information, visit the GitHub page: https://github.com/arc-1409/Footbal
 program.parse(process.argv);
 
 const options = program.opts(); // must be after parsing
+const command = program.args[0]; // take command
 
 // take user value (not the flag), search the value in the map, make const variable for value
 // league: --league flag
@@ -53,9 +54,11 @@ const leagueName = leagueList[targetLeague];
 const targetTeam = options.team;
 const teamName = teamList[targetTeam];
 
+// style
 const terminalWidth = process.stdout.columns;
 const line = "-";
 const horizontal = line.repeat(terminalWidth);
+
 
 // error messages
 if (!teamName) {
@@ -66,7 +69,7 @@ if (league && !leagueName) {
     process.exit(1); }
 
 // main
-async function main() {
+async function main(command) {
     console.log(horizontal);
     console.log(chalk.yellow(figlet.textSync("FootballWatcher", {horizontalLayout:"full"})) );
     console.log(horizontal);
@@ -74,18 +77,19 @@ async function main() {
     try {
         const browser = await puppeteer.launch({ headless: true });
         const page = await browser.newPage();
-
-        // pass to functions in app.js
-        if(leagueName === "Premier League") {
-            await getPositionPrem(page, teamName); }  // put await to make sure one process closes before another starts
-        else if (leagueName === "La Liga") {
-            await getPositionLaLiga(page, teamName); } 
-        else if (leagueName === "German Bundesliga") {
-            await getPositionBund(page, teamName); }
-        else {
-            await getPositionPrem(page, teamName);
-            await getPositionLaLiga(page, teamName); 
-            await getPositionBund(page, teamName); }
+    
+        if (command === "search-standing") {
+            if(leagueName === "Premier League") {
+                await getPositionPrem(page, teamName); // put await to make sure one process closes before another starts
+            } else if (leagueName === "La Liga") {
+                await getPositionLaLiga(page, teamName); 
+            } else if (leagueName === "German Bundesliga") {
+                await getPositionBund(page, teamName);
+            } else {
+                await getPositionPrem(page, teamName);
+                await getPositionLaLiga(page, teamName); 
+                await getPositionBund(page, teamName); }
+        }
         
         if(teamName === "Tottenham Hostpur") {
             console.log("COYS!");
