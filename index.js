@@ -117,4 +117,4 @@ async function main(command) {
     }
 }
 
-main(); 
+main(command); 
