@@ -1,8 +1,10 @@
 # FootballWatcher
 
-A CLI application for tracking football matches and updates right in your terminal. Inspired by the team's lifelong love of European football, this project aims to provide easy and aesthetic access of live football information using code. The application is written entirely in Javascript and with Node.js. As of now, we've only included two football leagues: Premier League and La Liga, but more will be added in the future. 
+A CLI application for tracking football matches and updates right in your terminal. Inspired by the team's lifelong love of European football, this project aims to provide easy and aesthetic access of live football information using code. 
 
-Try every team to see which teams we support! 
+Our team recognizes a lack of concentrated collection of resources and analyses on football, contrary to other popular sports such as basketball. And as football players and enjoyers ourselves who also love analyzing and debating among ourselves on various aspects of football (teams, players, management, transfers) about as much as we love coding haha, we decide to build a CLI application to fill this gap. This project started on September 20th, but we will continue to build more and more features on it. 
+
+Try guessing which teams we support!
 
 ## ✨ Existing Features
 
@@ -35,7 +37,7 @@ Install dependencies (if applicable):
 npm install
 ```
 
-## Usage
+## 💡 Usage
 
 ```bash
 node index.js [options]
