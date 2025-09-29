@@ -12,8 +12,11 @@ program
     .version("1.0.0")
     .name("first-cli")
     .description("test for hackathon")
+    .command('search-standing [league] <team>')
     .option("-l, --league <type>", "league name")
     .option("-t, --team <type>", "team name")
+
+program
     .option("-c, --coach", "head coach") // future feature
     .option("--xi, --startingxi", "starting eleven") // must be double dashes for non single-character flags
     .option("-g, --g <type> <type>", "look up games") // future feature
@@ -42,10 +45,13 @@ program.parse(process.argv);
 const options = program.opts(); // must be after parsing
 
 // take user value (not the flag), search the value in the map, make const variable for value
-const league = options.league;
-const leagueName = leagueList[league];
-const team = options.team;
-const teamName = teamList[team];
+// league: --league flag
+// targetLeague: --league three-letter code value that user inputs, key in LeagueList
+// leagueName: the value in LeagueList that corresponds with the key (targetLeague) 
+const targetLeague = options.league;
+const leagueName = leagueList[targetLeague];
+const targetTeam = options.team;
+const teamName = teamList[targetTeam];
 
 const terminalWidth = process.stdout.columns;
 const line = "-";
