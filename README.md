@@ -4,13 +4,13 @@ A CLI application for tracking football matches and updates right in your termin
 
 Try every team to see which teams we support! 
 
-## Existing Features
+## 🔍 Existing Features
 
 - Track your football teams' live rankings in Premier League, La Liga, and German Bundesliga
 
 ...and more to come in the future!
 
-## Tools Used
+## 🛠️ Tools Used
 
 - **node.js**: javascript environment where this command line project is written on
 - **commander.js**: a node.js library, provides definable commands and options that take user input for command line interfaces
@@ -19,7 +19,7 @@ Try every team to see which teams we support!
 - **chalk**: a terminal program whose API can add colors to words, including stylized FIGlet art
 - **inquirer.js**: another node.js library that also takes prompts, much like commander. we're working on this one!
 
-## Installation
+## 🔑 Installation
 
 Start by cloning the repository in your terminal:
 
@@ -61,6 +61,13 @@ node footballwatcher.js --help
 - `-h, --help`: Show usage instructions
 
 ## Most Recent Updates
+
+- Resolved bugs in team lookups
+- Added German Bundesliga to the Lexicon
+
+## ⏳ Future Features
+
+We plan to work on adding these features in the future, in no particular order yet:  
 
 - Resolved bugs in team lookups
 - Added German Bundesliga to the Lexicon
