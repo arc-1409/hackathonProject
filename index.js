@@ -12,7 +12,7 @@ program
     .version("1.0.0")
     .name("first-cli")
     .description("test for hackathon: search for team's standing in leagues")
-    .command('search-standing [league] <team>')
+    .command('search-standing <team> [league]') // switch up order
     .option("-l, --league <type>", "league name")
     .option("-t, --team <type>", "team name")
 
@@ -49,9 +49,9 @@ const command = program.args[0]; // take command
 // league: --league flag
 // targetLeague: --league three-letter code value that user inputs, key in LeagueList
 // leagueName: the value in LeagueList that corresponds with the key (targetLeague) 
-const targetLeague = options.league;
+const targetLeague = options.league || program.args[2];
 const leagueName = leagueList[targetLeague];
-const targetTeam = options.team;
+const targetTeam = options.team || program.args[1]; // args[2] is the positional <team>
 const teamName = teamList[targetTeam];
 
 // style
@@ -60,13 +60,14 @@ const line = "-";
 const horizontal = line.repeat(terminalWidth);
 
 
-// error messages
+/* error messages
 if (!teamName) {
     console.log(`ERROR: Unknown team code ${team}`); 
     process.exit(1); } 
 if (league && !leagueName) {
     console.log(`Error: Unknown league name ${league}`); 
     process.exit(1); }
+*/
 
 // main
 async function main(command) {
@@ -79,11 +80,11 @@ async function main(command) {
         const page = await browser.newPage();
     
         if (command === "search-standing") {
-            if(leagueName === "Premier League") {
+            if(leagueName && leagueName === "Premier League") {
                 await getPositionPrem(page, teamName); // put await to make sure one process closes before another starts
-            } else if (leagueName === "La Liga") {
+            } else if (leagueName && leagueName === "La Liga") {
                 await getPositionLaLiga(page, teamName); 
-            } else if (leagueName === "German Bundesliga") {
+            } else if (leagueName && leagueName === "German Bundesliga") {
                 await getPositionBund(page, teamName);
             } else {
                 await getPositionPrem(page, teamName);
