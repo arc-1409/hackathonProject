@@ -66,13 +66,19 @@ node footballwatcher.js --help
 
 - Resolved bugs in team lookups
 - Added German Bundesliga to the Lexicon
+- Swtiched up to using commander.js's command positionals instead of flags
 
 ## ⏳ Future Features
 
 We plan to work on adding these features in the future, in no particular order yet:  
 
-- Resolved bugs in team lookups
-- Added German Bundesliga to the Lexicon
+- Most recent match result
+- Star favorite teams and leagues to follow-up
+- starting xi
+- league table look up
+- player position
+- coach lookup
+- flexibility: support both positionals and flags
 
 ## 🫂 Contributing
 
