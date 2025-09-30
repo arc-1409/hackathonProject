@@ -27,7 +27,7 @@ Start by cloning the repository in your terminal:
 
 ```bash
 git clone https://github.com/arc-1409/FootballWatcher.git
-cd FootballWatcher
+cd football-watcher
 ```
 
 Install dependencies (if applicable):
@@ -50,10 +50,9 @@ All team name inputs are in the format of the team's three-letter code. Refer to
 ### Example commands
 
 ```bash
-node footballwatcher.js -l premier -t bar
-node footballwatcher.js -t rma
-node footballwatcher.js --live
-node footballwatcher.js --help
+node index.js search-standing bar 
+node index.js search-standing rma laliga
+node index.js --help
 ```
 
 ## 🧮 Options
