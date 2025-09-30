@@ -2,6 +2,11 @@ import puppeteer from "puppeteer";
 
 // english premier league
 async function getPositionPrem(page, teamName) {
+    // catch no teamName error
+    if (!teamName) {
+        console.log("ERROR: undefined teamName");
+    }
+
     await page.goto("https://www.bbc.com/sport/football/premier-league/table", { waitUntil: "networkidle2"});
     await page.waitForSelector("tr[class*='CellsRow']");
 
@@ -31,18 +36,22 @@ async function getPositionPrem(page, teamName) {
 
 // spanish la liga
 async function getPositionLaLiga(page, teamName) {
+    if (!teamName) {
+        console.log("ERROR: undefined teamName");
+    }
+
     await page.goto("https://www.bbc.com/sport/football/spanish-la-liga/table", { waitUntil: "networkidle2"});
     await page.waitForSelector("tr[class*='CellsRow']");
 
     const teamsList = await page.$$eval("tr[class*='CellsRow']", rows => {
         return rows.map(row => {
-            const rank = row.querySelector("span.ssrcss-4fgj5b-Rank")?.innerText.trim();
+            rank = row.querySelector("span.ssrcss-4fgj5b-Rank")?.innerText.trim();
 
             // Try aria-hidden first, fallback to visually-hidden
             // fix 2: try visually-hidden, fallback to aria-hidden
             let name = row.querySelector("span.visually-hidden")?.innerText.trim(); 
             if (!name) {
-                name = row.querySelector("span[aria-hidden='true'][data-600]")?.getAttribute("data-600")?.trim();
+                const name = row.querySelector("span[aria-hidden='true'][data-600]")?.getAttribute("data-600")?.trim();
             }
             return { rank, name };
         });
@@ -58,6 +67,10 @@ async function getPositionLaLiga(page, teamName) {
 
 // german bundesliga
 async function getPositionBund(page, teamName) {
+    if (!teamName) {
+        console.log("ERROR: undefined teamName");
+    }
+    
     await page.goto("https://www.bbc.com/sport/football/german-bundesliga/table", { waitUntil: "networkidle2"});
     await page.waitForSelector("tr[class*='CellsRow']");
 
