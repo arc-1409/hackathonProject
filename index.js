@@ -30,6 +30,7 @@ program
         }
 
         main("search-standing",  {leagueName, teamName}); 
+    }    
 
 program
     .option("-c, --coach", "head coach") // future feature
