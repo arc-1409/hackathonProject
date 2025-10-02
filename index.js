@@ -14,7 +14,22 @@ program
     .command('search-standing <team> [league]') // switch up order
     .option("-l, --league <type>", "league name")
     .option("-t, --team <type>", "team name")
-    .action(
+    .action((leagueArg, teamArg, options) => {
+        // take user value (not the flag), search the value in the map, make const variable for value
+        // league: --league flag
+        // targetLeague: --league three-letter code value that user inputs, key in LeagueList
+        // leagueName: the value in LeagueList that corresponds with the key (targetLeague) 
+        const targetLeague = options.league || program.args[2];
+        const leagueName = leagueList[targetLeague];
+        const targetTeam = options.team || program.args[1]; // args[2] is the positional <team>
+        const teamName = teamList[targetTeam];
+
+        if (!league || !team) {
+            console.error("Error: please specify both teams.");
+            process.exit(1);
+        }
+
+        main("search-standing",  {leagueName, teamName}); 
 
 program
     .option("-c, --coach", "head coach") // future feature
@@ -45,15 +60,6 @@ program.parse(process.argv);
 const options = program.opts(); // must be after parsing
 const command = program.args[0]; // take command
 
-// take user value (not the flag), search the value in the map, make const variable for value
-// league: --league flag
-// targetLeague: --league three-letter code value that user inputs, key in LeagueList
-// leagueName: the value in LeagueList that corresponds with the key (targetLeague) 
-const targetLeague = options.league || program.args[2];
-const leagueName = leagueList[targetLeague];
-const targetTeam = options.team || program.args[1]; // args[2] is the positional <team>
-const teamName = teamList[targetTeam];
-
 // style
 const terminalWidth = process.stdout.columns;
 const line = "-";
@@ -81,15 +87,15 @@ async function main(command, options) {
     
         if (command === "search-standing") {
             if(leagueName && leagueName === "Premier League") {
-                await getPositionPrem(page, teamName); // put await to make sure one process closes before another starts
+                await getPositionPrem(page, options.teamName); // put await to make sure one process closes before another starts
             } else if (leagueName && leagueName === "La Liga") {
-                await getPositionLaLiga(page, teamName); 
+                await getPositionLaLiga(page, options.teamName); 
             } else if (leagueName && leagueName === "German Bundesliga") {
-                await getPositionBund(page, teamName);
+                await getPositionBund(page, options.teamName);
             } else {
-                await getPositionPrem(page, teamName);
-                await getPositionLaLiga(page, teamName); 
-                await getPositionBund(page, teamName); }
+                await getPositionPrem(page, options.teamName);
+                await getPositionLaLiga(page, options.teamName); 
+                await getPositionBund(page, options.teamName); }
         }
         
         if(teamName === "Tottenham Hostpur") {
