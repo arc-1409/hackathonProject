@@ -7,7 +7,6 @@ import figlet from "figlet";
 import { getPositionPrem, getPositionLaLiga, getPositionBund } from "./algorithms/standing.js";
 import { leagueList, teamList, positionList } from "./lexicon.js";
 
-// TODO: figure out undashed commands
 program 
     .version("1.0.0")
     .name("first-cli")
