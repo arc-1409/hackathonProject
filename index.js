@@ -29,7 +29,7 @@ program
             process.exit(1);
         }
 
-        main("search-standing",  {leagueName, teamName}); 
+        main("search-standing", { leagueName, teamName }); 
     }    
 
 program
