@@ -14,6 +14,7 @@ program
     .command('search-standing <team> [league]') // switch up order
     .option("-l, --league <type>", "league name")
     .option("-t, --team <type>", "team name")
+    .action(
 
 program
     .option("-c, --coach", "head coach") // future feature
@@ -69,7 +70,7 @@ if (league && !leagueName) {
 */
 
 // main
-async function main(command) {
+async function main(command, options) {
     console.log(horizontal);
     console.log(chalk.yellow(figlet.textSync("FootballWatcher", {horizontalLayout:"full"})) );
     console.log(horizontal);
