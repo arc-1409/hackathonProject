@@ -131,5 +131,3 @@ async function main(command, options) {
         console.error("Error: ", err);
     }
 }
-
-main(command); 
