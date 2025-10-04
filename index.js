@@ -14,23 +14,25 @@ program
     .command('search-standing <team> [league]') // switch up order
     .option("-l, --league <type>", "league name")
     .option("-t, --team <type>", "team name")
-    .action((leagueArg, teamArg, options) => {
+    .action((options) => {
+        const options = program.opts(); // must be after parsing
+
         // take user value (not the flag), search the value in the map, make const variable for value
         // league: --league flag
-        // targetLeague: --league three-letter code value that user inputs, key in LeagueList
+        // targetLeague: --league three-letter code value that user inputs, key in LeagueList || positional from .command 
         // leagueName: the value in LeagueList that corresponds with the key (targetLeague) 
-        const targetLeague = options.league || program.args[2];
+        const targetLeague = options.league || leagueArg;
         const leagueName = leagueList[targetLeague];
-        const targetTeam = options.team || program.args[1]; // args[2] is the positional <team>
+        const targetTeam = options.team || teamArg; // args[2] is the positional <team>
         const teamName = teamList[targetTeam];
 
-        if (!league || !team) {
-            console.error("Error: please specify both teams.");
+        if (!targetTeam) {
+            console.error("Error: please specify team name.");
             process.exit(1);
         }
 
         main("search-standing", { leagueName, teamName }); 
-    }    
+    });  
 
 program
     .option("-c, --coach", "head coach") // future feature
