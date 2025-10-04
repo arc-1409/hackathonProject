@@ -65,7 +65,6 @@ For more information, visit the GitHub page: https://github.com/arc-1409/Footbal
 
 program.parse(process.argv);
 
-const options = program.opts(); // must be after parsing
 const command = program.args[0]; // take command
 
 // style
