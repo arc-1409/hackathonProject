@@ -7,6 +7,11 @@ import figlet from "figlet";
 import { getPositionPrem, getPositionLaLiga, getPositionBund } from "./algorithms/standing.js";
 import { leagueList, teamList, positionList } from "./lexicon.js";
 
+// global options
+program
+    .option("-t, --team <type>", "team name")
+    .option("-l, --league <type>", "league name")
+
 program 
     .version("1.0.0")
     .name("first-cli")
