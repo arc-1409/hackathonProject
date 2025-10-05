@@ -66,6 +66,7 @@ node index.js --help
 - Resolved bugs in team lookups
 - Added German Bundesliga to the Lexicon
 - Swtiched up to using commander.js's command positionals instead of flags
+- Centralize, compress, and optimize algorithms for cleaner code
 
 ## ⏳ Future Features
 
