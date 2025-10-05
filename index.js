@@ -50,9 +50,12 @@ program.addHelpText("beforeAll", `
 ================================ FootballWatcher User Guide ================================
 
 Commands: 
-    -h, --help              User guide
-    -l, --league <type>     League tag, must include league name after; optional
-    -t, --team <type>       Team tag, must include team tag after
+    search-standing <team> [league]         search for a team's current standing
+
+Options: 
+    -h, --help                              User guide
+    -l, --league <type>                     League tag, must include league name after; optional
+    -t, --team <type>                       Team tag, must include team tag after
 
 Team names are three-letter codes of the team. Refer to: https://liaison.reuters.com/tools/sports-team-codes 
    
