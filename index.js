@@ -75,7 +75,7 @@ if (league && !leagueName) {
 */
 
 // main
-async function main(command, args) {
+async function main(command, args = {}) {
     // style
     const terminalWidth = process.stdout.columns;
     const line = "-";
