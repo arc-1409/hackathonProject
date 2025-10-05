@@ -65,12 +65,6 @@ For more information, visit the GitHub page: https://github.com/arc-1409/Footbal
 
 program.parse(process.argv);
 
-// style
-const terminalWidth = process.stdout.columns;
-const line = "-";
-const horizontal = line.repeat(terminalWidth);
-
-
 /* error messages
 if (!teamName) {
     console.log(`ERROR: Unknown team code ${team}`); 
@@ -82,6 +76,11 @@ if (league && !leagueName) {
 
 // main
 async function main(command, options) {
+    // style
+    const terminalWidth = process.stdout.columns;
+    const line = "-";
+    const horizontal = line.repeat(terminalWidth);
+
     console.log(horizontal);
     console.log(chalk.yellow(figlet.textSync("FootballWatcher", {horizontalLayout:"full"})) );
     console.log(horizontal);
