@@ -4,7 +4,7 @@ import {program} from "commander";
 import puppeteer from "puppeteer";
 import chalk from "chalk";
 import figlet from "figlet";
-import { searchStanding } from "algorithms.js";
+import { searchStanding } from "./algorithms.js";
 import { leagueList, teamList, positionList } from "./lexicon.js";
 
 // global options
