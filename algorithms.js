@@ -38,3 +38,4 @@ async function searchStanding(page, args) {
     } // no need to close page; index.js does it already
 }
 
+export {searchStanding};
