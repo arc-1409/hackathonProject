@@ -19,7 +19,7 @@ program
     .command('search-standing <team> [league]') // switch up order
     .option("-l, --league <type>", "league name")
     .option("-t, --team <type>", "team name")
-    .action((options) => {
+    .action((teamArg, leagueArg, options) => {
         const options = program.opts(); // must be after parsing
 
         // take user value (not the flag), search the value in the map, make const variable for value
@@ -75,7 +75,7 @@ if (league && !leagueName) {
 */
 
 // main
-async function main(command, options) {
+async function main(command, args) {
     // style
     const terminalWidth = process.stdout.columns;
     const line = "-";
