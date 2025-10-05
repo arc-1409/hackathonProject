@@ -92,23 +92,25 @@ async function main(command, args = {}) {
         if (command === "search-standing") {
             const { leagueName, teamName } = args;
             await searchStanding(page, teamName, leagueName);
-        }
-        
-        if(teamName === "Tottenham Hostpur") {
-            console.log("COYS!");
-        }
-        if(teamName === "Barcelona") {
-            const redWord = chalk.red("y visca");
-            const blueWord = chalk.blue("catalunya!");
-            const visca = figlet.textSync("Visca");
-            const barca = figlet.textSync("Barca!");
-            console.log(chalk.red(figlet.textSync("Visca", {horizontalLayout:"full"})));
-            console.log(chalk.blue(figlet.textSync("Barca", {horizontalLayout:"full"})));
-            console.log(`${redWord} ${blueWord}`); 
-        }
-        if(teamName === "Real Madrid") {
-            const yellowWord = chalk.yellow("Hala Madrid!");
-            console.log(`${yellowWord}`); 
+            
+            // easter egg; might move out of loop later
+            if(teamName === "Tottenham Hostpur") {
+                console.log("COYS!");
+            }
+
+            if(teamName === "Barcelona") {
+                const redWord = chalk.red("y visca");
+                const blueWord = chalk.blue("catalunya!");
+                const visca = figlet.textSync("Visca");
+                const barca = figlet.textSync("Barca!");
+                console.log(chalk.red(figlet.textSync("Visca", {horizontalLayout:"full"})));
+                console.log(chalk.blue(figlet.textSync("Barca", {horizontalLayout:"full"})));
+                console.log(`${redWord} ${blueWord}`); 
+            }
+            if(teamName === "Real Madrid") {
+                const yellowWord = chalk.yellow("Hala Madrid!");
+                console.log(`${yellowWord}`); 
+            }
         }
 
         console.log(horizontal);
