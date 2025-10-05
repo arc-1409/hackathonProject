@@ -65,8 +65,6 @@ For more information, visit the GitHub page: https://github.com/arc-1409/Footbal
 
 program.parse(process.argv);
 
-const command = program.args[0]; // take command
-
 // style
 const terminalWidth = process.stdout.columns;
 const line = "-";
