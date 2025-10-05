@@ -90,7 +90,8 @@ async function main(command, args = {}) {
         const page = await browser.newPage();
     
         if (command === "search-standing") {
-            await searchStanding(page, teamName);
+            const { leagueName, teamName } = args;
+            await searchStanding(page, teamName, leagueName);
         }
         
         if(teamName === "Tottenham Hostpur") {
