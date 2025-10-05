@@ -36,7 +36,13 @@ program
             process.exit(1);
         }
 
-        main("search-standing", { leagueName, teamName }); 
+        // create object to simplify function calling
+        const teamLeague = {
+            team: teamName,
+            league: leagueName,
+        }
+
+        main("search-standing", teamLeague); // { leagueName, teamName }
     });  
 
 program
@@ -78,7 +84,7 @@ if (league && !leagueName) {
 */
 
 // main
-async function main(command, args = {}) {
+async function main(command, obj) {
     // style
     const terminalWidth = process.stdout.columns;
     const line = "-";
@@ -93,8 +99,10 @@ async function main(command, args = {}) {
         const page = await browser.newPage();
     
         if (command === "search-standing") {
-            const { leagueName, teamName } = args;
-            await searchStanding(page, teamName, leagueName);
+            if ("league" in obj) {
+                await searchStanding(page, obj.team, obj.leauge);
+            }
+            await searchStanding(page, obj.team);
             
             // easter egg; might move out of loop later
             if(teamName === "Tottenham Hostpur") {

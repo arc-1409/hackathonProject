@@ -1,6 +1,8 @@
 import puppeteer from "puppeteer";
 
 async function searchStanding(page, teamName, leagueName) {
+    leagueName = leagueName || 0; // optional leagueName 
+
     if(!teamName) {
         console.error("ERROR: undefined teamName");
     }
