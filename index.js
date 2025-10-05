@@ -19,7 +19,7 @@ program
     .command('search-standing <team> [league]') // switch up order
     .option("-l, --league <type>", "league name")
     .option("-t, --team <type>", "team name")
-    .action((teamArg, leagueArg, options) => {
+    .action((teamArg, leagueArg) => {
         const options = program.opts(); // must be after parsing
 
         // take user value (not the flag), search the value in the map, make const variable for value
