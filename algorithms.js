@@ -12,6 +12,10 @@ async function searchStanding(page, teamName, leagueName) {
         await page.goto("https://www.bbc.com/sport/football/spanish-la-liga/table", { waitUntil: "networkidle2"});
     } else if (leaguename === "German Bundesliga") {
         await page.goto("https://www.bbc.com/sport/football/german-bundesliga/table", { waitUntil: "networkidle2"});
+    } else {
+        await page.goto("https://www.bbc.com/sport/football/premier-league/table", { waitUntil: "networkidle2"});
+        await page.goto("https://www.bbc.com/sport/football/spanish-la-liga/table", { waitUntil: "networkidle2"});
+        await page.goto("https://www.bbc.com/sport/football/german-bundesliga/table", { waitUntil: "networkidle2"});
     }
 
     const teamsList = await page.$$eval("tr[class*='CellsRow']", rows => {
