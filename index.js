@@ -90,16 +90,7 @@ async function main(command, options) {
         const page = await browser.newPage();
     
         if (command === "search-standing") {
-            if(leagueName && leagueName === "Premier League") {
-                await getPositionPrem(page, options.teamName); // put await to make sure one process closes before another starts
-            } else if (leagueName && leagueName === "La Liga") {
-                await getPositionLaLiga(page, options.teamName); 
-            } else if (leagueName && leagueName === "German Bundesliga") {
-                await getPositionBund(page, options.teamName);
-            } else {
-                await getPositionPrem(page, options.teamName);
-                await getPositionLaLiga(page, options.teamName); 
-                await getPositionBund(page, options.teamName); }
+            await searchStanding(page, teamName);
         }
         
         if(teamName === "Tottenham Hostpur") {
