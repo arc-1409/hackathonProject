@@ -2,7 +2,7 @@ import puppeteer from "puppeteer";
 
 /*
 TODO
-- optional parameter
+- add recent match result algorithm
 */
 
 async function searchStanding(page, obj) {
