@@ -20,7 +20,7 @@ async function searchStanding(page, obj) {
         scrape("https://www.bbc.com/sport/football/spanish-la-liga/table");
     } else if (obj.league === "German Bundesliga") {
         scrape("https://www.bbc.com/sport/football/german-bundesliga/table");
-    } else {  // for when league isn't specified2
+    } else if (!("league" in obj)) {  // for when league isn't specified2
         while (found === false) {
             console.log("should have three undefined?");
             scrape("https://www.bbc.com/sport/football/premier-league/table");
@@ -31,6 +31,8 @@ async function searchStanding(page, obj) {
             console.log("here maybe?");
             scrape("https://www.bbc.com/sport/football/german-bundesliga/table");
         }  
+    } else {
+        console.error("ERROR: unrecognized league name");
     }
 
     async function scrape(url) {
