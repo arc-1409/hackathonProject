@@ -10,6 +10,8 @@ import { leagueList, teamList, positionList } from "./lexicon.js";
 /*
 TODO 
 - add command + options functionality
+- explore other ascii art (easter egg and/or title)
+- algorithm 2: most recent match result 
 */
 
 // global options
@@ -31,9 +33,19 @@ program
         // league: --league flag
         // targetLeague: --league three-letter code value that user inputs, key in LeagueList || positional from .command 
         // leagueName: the value in LeagueList that corresponds with the key (targetLeague) 
-        const targetLeague = options.league || leagueArg;
+        if (options.league) {
+            targetLeague = options.league;
+        } else {
+            targetLeague = leagueArg;
+        }
+
+        if (options.team) {
+            targetTeam = options.team;
+        } else {
+            targetTeam = teamArg; // args[2] is the positional <team>
+        }
+        
         const leagueName = leagueList[targetLeague];
-        const targetTeam = options.team || teamArg; // args[2] is the positional <team>
         const teamName = teamList[targetTeam];
 
         if (!targetTeam) {
