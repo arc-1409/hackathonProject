@@ -10,6 +10,7 @@ import { leagueList, teamList, positionList } from "./lexicon.js";
 /*
 TODO 
 - fix -t option.team leagueArg error
+- figure out how/where to store documentation
 - add use case file
 - explore other ascii art (easter egg and/or title)
 - algorithm 2: most recent match result 
