@@ -39,7 +39,7 @@ async function searchStanding(page, obj) {
 
     async function scrape(url, leagueResult) {
         await page.goto(url, { waitUntil: "networkidle2"});
-        const teamsList = await page.$$eval("tr[class*='CellsRow']", rows => {
+        const teams = await page.$$eval("tr[class*='CellsRow']", rows => {
             return rows.map(row => {
                 const rank = row.querySelector("span.ssrcss-4fgj5b-Rank")?.textContent.trim();
 
@@ -53,7 +53,7 @@ async function searchStanding(page, obj) {
             });
         });
 
-        const targetTeam = teamsList.find(t => t.name?.toLowerCase() === obj.team.toLowerCase());
+        const targetTeam = teams.find(t => t.name?.toLowerCase() === obj.team.toLowerCase());
 
         if(targetTeam) {
             console.log(`${obj.team} is currently in position ${targetTeam.rank} on ${leagueResult}.`);
