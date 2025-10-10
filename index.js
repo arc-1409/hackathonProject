@@ -7,6 +7,11 @@ import figlet from "figlet";
 import { searchStanding } from "./algorithms.js";
 import { leagueList, teamList, positionList } from "./lexicon.js";
 
+/*
+TODO 
+- add command + options functionality
+*/
+
 // global options
 program
     .option("-t, --team <type>", "team name")
