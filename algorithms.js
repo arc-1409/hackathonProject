@@ -13,28 +13,25 @@ async function searchStanding(page, obj) {
 
     // filter leagues
     if(obj.league === "Premier League") {
-        await page.goto("https://www.bbc.com/sport/football/premier-league/table", { waitUntil: "networkidle2"});
-        scrape();
+        scrape("https://www.bbc.com/sport/football/premier-league/table");
     } else if (obj.league === "La Liga") {
-        await page.goto("https://www.bbc.com/sport/football/spanish-la-liga/table", { waitUntil: "networkidle2"});
-        scrape();
+        scrape("https://www.bbc.com/sport/football/spanish-la-liga/table");
     } else if (obj.league === "German Bundesliga") {
-        await page.goto("https://www.bbc.com/sport/football/german-bundesliga/table", { waitUntil: "networkidle2"});
-        scrape();
+        scrape("https://www.bbc.com/sport/football/german-bundesliga/table");
     } else {  // for when league isn't specified2
         console.log("should have three undefined?");
-        await page.goto("https://www.bbc.com/sport/football/premier-league/table", { waitUntil: "networkidle2"});
-        scrape();
+        scrape("https://www.bbc.com/sport/football/premier-league/table");
+
         console.log("or is it just stuck here");
-        await page.goto("https://www.bbc.com/sport/football/spanish-la-liga/table", { waitUntil: "networkidle2"});
-        scrape();
+        scrape("https://www.bbc.com/sport/football/spanish-la-liga/table");
+
         console.log("here maybe?");
-        await page.goto("https://www.bbc.com/sport/football/german-bundesliga/table", { waitUntil: "networkidle2"});
-        scrape();
+        scrape("https://www.bbc.com/sport/football/german-bundesliga/table");
     }
 
-    async function scrape() {
-        const teamsList = await page.$$eval("tr[class*='CellsRow']", rows => {
+    async function scrape(url) {
+        await page.goto(url, { waitUntil: "networkidle2"});
+        teamsList = await page.$$eval("tr[class*='CellsRow']", rows => {
             return rows.map(row => {
                 const rank = row.querySelector("span.ssrcss-4fgj5b-Rank")?.textContent.trim();
 
@@ -47,16 +44,16 @@ async function searchStanding(page, obj) {
                 return { rank, name };
             });
         });
+
+        const targetTeam = teamsList.find(t => t.name?.toLowerCase() === obj.team.toLowerCase());
+
+        if(targetTeam) {
+            console.log(`${obj.team} is currently in position ${targetTeam.rank} on ${obj.league}.`);
+            return; // break out of the loop? 
+        } else {
+            console.log(`${obj.team} is not on ${obj.league}.`);
+        } // no need to close page; index.js does it already
     }
-
-    const targetTeam = teamsList.find(t => t.name?.toLowerCase() === obj.team.toLowerCase());
-
-    if(targetTeam) {
-        console.log(`${obj.team} is currently in position ${targetTeam.rank} on ${obj.league}.`);
-        return; // break out of the loop? 
-    } else {
-        console.log(`${obj.team} is not on ${obj.league}.`);
-    } // no need to close page; index.js does it already
 }
 
 export {searchStanding};
