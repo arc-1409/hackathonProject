@@ -45,13 +45,14 @@ node index.js [options]
 
 ### Team name input
 
-All team name inputs are in the format of the team's three-letter code. Refer to lexicon.js or [this link](https://liaison.reuters.com/tools/sports-team-codes) for the team name codes.
+All team name inputs are in the format of the team's three-letter code. Refer to lexicon.js or [this link](https://liaison.reuters.com/tools/sports-team-codes) for the team name codes. You can input any combination of command arguments and commander.js options, as shown below. 
 
 ### Example commands
 
 ```bash
-node index.js search-standing bar 
-node index.js search-standing rma laliga
+node index.js search-standing che 
+node index.js search-standing -t rma -l laliga
+node index.js search-standing mci prem
 node index.js --help
 ```
 
@@ -65,9 +66,9 @@ node index.js --help
 
 - Resolved bugs in team lookups
 - Added German Bundesliga to the Lexicon
-- Swtiched up to using commander.js's command positionals instead of flags
-- Centralize, compress, and optimize algorithms as well as deleted unneeded folders for cleaner code and file organization
+- Centralized, compressed, and optimized algorithms as well as deleted unneeded folders for cleaner code and file organization
 - Resolved optional parameters passing into algorithms by passing objects instead of object properties individually (10 OCT 25)
+- Alogirhtm now accepts any combination of command arguments and options for user input
 
 ## ⏳ Future Features
 

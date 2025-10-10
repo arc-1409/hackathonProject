@@ -9,7 +9,7 @@ import { leagueList, teamList, positionList } from "./lexicon.js";
 
 /*
 TODO 
-- add command + options functionality
+- add use case file
 - explore other ascii art (easter egg and/or title)
 - algorithm 2: most recent match result 
 */
@@ -34,7 +34,9 @@ program
         // targetLeague: --league three-letter code value that user inputs, key in LeagueList || positional from .command 
         // leagueName: the value in LeagueList that corresponds with the key (targetLeague) 
         let targetLeague = leagueArg;
-        let targetTeam = teamArg;
+        let
+        
+        targetTeam = teamArg;
         
         if (options.league) {
             targetLeague = options.league;
