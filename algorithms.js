@@ -49,7 +49,6 @@ async function searchStanding(page, obj) {
 
         if(targetTeam) {
             console.log(`${obj.team} is currently in position ${targetTeam.rank} on ${obj.league}.`);
-            return; // break out of the loop? 
         } else {
             console.log(`${obj.team} is not on ${obj.league}.`);
         } // no need to close page; index.js does it already
