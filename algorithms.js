@@ -62,6 +62,7 @@ async function searchStanding(page, obj) {
         if(targetTeam) {
             console.log(`${obj.team} is currently in position ${targetTeam.rank} on ${leagueResult}.`);
             found = true;
+        }  // no need to close page; index.js does it already
     }
 
     // waitForTimeout no longer works: https://github.com/spatie/browsershot/pull/834
