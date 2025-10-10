@@ -110,11 +110,11 @@ async function main(command, obj) {
             */
             
             // easter egg; might move out of loop later
-            if(teamName === "Tottenham Hostpur") {
+            if(obj.team === "Tottenham Hostpur") {
                 console.log("COYS!");
             }
 
-            if(teamName === "Barcelona") {
+            if(obj.team === "Barcelona") {
                 const redWord = chalk.red("y visca");
                 const blueWord = chalk.blue("catalunya!");
                 const visca = figlet.textSync("Visca");
@@ -123,7 +123,7 @@ async function main(command, obj) {
                 console.log(chalk.blue(figlet.textSync("Barca", {horizontalLayout:"full"})));
                 console.log(`${redWord} ${blueWord}`); 
             }
-            if(teamName === "Real Madrid") {
+            if(obj.team === "Real Madrid") {
                 const yellowWord = chalk.yellow("Hala Madrid!");
                 console.log(`${yellowWord}`); 
             }
