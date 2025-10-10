@@ -101,6 +101,7 @@ async function main(command, obj) {
         if (command === "search-standing") {
             if ("league" in obj) {
                 await searchStanding(page, obj.team, obj.leauge);
+                console.log("here");
             } else {
                 await searchStanding(page, obj.team); // can't be outside if loop
             }
