@@ -80,7 +80,6 @@ We plan to work on adding these features in the future, in no particular order y
 - league table look up
 - player position
 - coach lookup
-- flexibility: support both positionals and flags
 
 ## 🫂 Contributing
 
