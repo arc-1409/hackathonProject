@@ -39,7 +39,7 @@ async function searchStanding(page, obj) {
 
     async function scrape(url, leagueResult) {
         await page.goto(url, { waitUntil: "networkidle2"});
-        teamsList = await page.$$eval("tr[class*='CellsRow']", rows => {
+        const teamsList = await page.$$eval("tr[class*='CellsRow']", rows => {
             return rows.map(row => {
                 const rank = row.querySelector("span.ssrcss-4fgj5b-Rank")?.textContent.trim();
 
