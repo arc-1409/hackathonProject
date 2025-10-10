@@ -100,14 +100,6 @@ async function main(command, obj) {
     
         if (command === "search-standing") {
             await searchStanding(page, obj); // take object itself instead of property; good practise
-            /*
-            if ("league" in obj) {
-                await searchStanding(page, obj.team, obj.leauge);
-                console.log("here");
-            } else {
-                await searchStanding(page, obj.team); // can't be outside if loop
-            }
-            */
             
             // easter egg; might move out of loop later
             if(obj.team === "Tottenham Hostpur") {
