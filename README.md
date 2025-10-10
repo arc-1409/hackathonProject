@@ -61,12 +61,13 @@ node index.js --help
 - `-t, --team <name>`: Track a specific football team
 - `-h, --help`: Show usage instructions
 
-## 🏁 Most Recent Updates
+## 🏁 5 Most Recent Updates
 
 - Resolved bugs in team lookups
 - Added German Bundesliga to the Lexicon
 - Swtiched up to using commander.js's command positionals instead of flags
 - Centralize, compress, and optimize algorithms as well as deleted unneeded folders for cleaner code and file organization
+- Resolved optional parameters passing into algorithms by passing objects instead of object properties individually (10 OCT 25)
 
 ## ⏳ Future Features
 
