@@ -20,7 +20,7 @@ async function searchStanding(page, obj) {
         await scrape("https://www.bbc.com/sport/football/spanish-la-liga/table", obj.league);
     } else if (obj.league === "German Bundesliga") {
         await scrape("https://www.bbc.com/sport/football/german-bundesliga/table", obj.league);
-    } else if (!("league" in obj)) {  // for when league isn't specified2
+    } else if (!obj.league) {  // for when league isn't specified, including undefined/""/doesn't exist. works better than !("league" in obj).
         await scrape("https://www.bbc.com/sport/football/premier-league/table", "Premier League");
         
         // divide each goto into one per if statement to avoid clashing
