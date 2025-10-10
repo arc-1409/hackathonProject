@@ -3,6 +3,7 @@ import puppeteer from "puppeteer";
 /*
 TODO
 - add recent match result algorithm
+- fix -t option.team leagueArg error
 */
 
 async function searchStanding(page, obj) {
@@ -10,6 +11,8 @@ async function searchStanding(page, obj) {
     if(!("team" in obj)) {
         console.error("ERROR: undefined teamName");
     }
+
+    let temporary = "Premier League";
 
     // filter leagues
     if(obj.league === "Premier League") {
@@ -19,9 +22,13 @@ async function searchStanding(page, obj) {
     } else if (obj.league === "German Bundesliga") {
         await page.goto("https://www.bbc.com/sport/football/german-bundesliga/table", { waitUntil: "networkidle2"});
     } else {  // for when league isn't specified
+        console.log("should have three undefined?");
         await page.goto("https://www.bbc.com/sport/football/premier-league/table", { waitUntil: "networkidle2"});
+        console.log("or is it just stuck here");
         await page.goto("https://www.bbc.com/sport/football/spanish-la-liga/table", { waitUntil: "networkidle2"});
+        console.log("here maybe?");
         await page.goto("https://www.bbc.com/sport/football/german-bundesliga/table", { waitUntil: "networkidle2"});
+        console.log("or here");
     }
 
     const teamsList = await page.$$eval("tr[class*='CellsRow']", rows => {
