@@ -7,12 +7,9 @@ TODO
 */
 
 async function searchStanding(page, obj) {
-
     if(!("team" in obj)) {
         console.error("ERROR: undefined teamName");
     }
-
-    let temporary = "Premier League";
 
     // filter leagues
     if(obj.league === "Premier League") {
@@ -50,15 +47,16 @@ async function searchStanding(page, obj) {
                 return { rank, name };
             });
         });
-
-        const targetTeam = teamsList.find(t => t.name?.toLowerCase() === obj.team.toLowerCase());
-
-        if(targetTeam) {
-            console.log(`${obj.team} is currently in position ${targetTeam.rank} on ${obj.league}.`);
-        } else {
-            console.log(`${obj.team} is not on ${obj.league}.`);
-        } // no need to close page; index.js does it already
     }
+
+    const targetTeam = teamsList.find(t => t.name?.toLowerCase() === obj.team.toLowerCase());
+
+    if(targetTeam) {
+        console.log(`${obj.team} is currently in position ${targetTeam.rank} on ${obj.league}.`);
+        return; // break out of the loop? 
+    } else {
+        console.log(`${obj.team} is not on ${obj.league}.`);
+    } // no need to close page; index.js does it already
 }
 
 export {searchStanding};
