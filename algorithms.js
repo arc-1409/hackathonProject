@@ -66,7 +66,7 @@ async function searchStanding(page, obj) {
 
     // waitForTimeout no longer works: https://github.com/spatie/browsershot/pull/834
     // https://stackoverflow.com/questions/74806202/how-can-i-add-a-settimeout-delay-to-my-browser-in-puppeteer 
-    function timeout(ms) {
+    async function timeout(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 }
