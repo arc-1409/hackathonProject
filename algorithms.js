@@ -3,7 +3,6 @@ import puppeteer from "puppeteer";
 /*
 TODO
 - add recent match result algorithm
-- fix -t option.team leagueArg error
 */
 
 async function searchStanding(page, obj) {
