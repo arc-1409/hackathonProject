@@ -15,30 +15,30 @@ async function searchStanding(page, obj) {
 
     // filter leagues
     if(obj.league === "Premier League") {
-        scrape("https://www.bbc.com/sport/football/premier-league/table");
+        scrape("https://www.bbc.com/sport/football/premier-league/table", obj.league);
     } else if (obj.league === "La Liga") {
-        scrape("https://www.bbc.com/sport/football/spanish-la-liga/table");
+        scrape("https://www.bbc.com/sport/football/spanish-la-liga/table", obj.league);
     } else if (obj.league === "German Bundesliga") {
-        scrape("https://www.bbc.com/sport/football/german-bundesliga/table");
+        scrape("https://www.bbc.com/sport/football/german-bundesliga/table", obj.league);
     } else if (!("league" in obj)) {  // for when league isn't specified2
         while (found === false) {
             console.log("should have three undefined?");
-            scrape("https://www.bbc.com/sport/football/premier-league/table");
+            scrape("https://www.bbc.com/sport/football/premier-league/table", "Premier League");
             timeout(500);
 
             console.log("or is it just stuck here");
-            scrape("https://www.bbc.com/sport/football/spanish-la-liga/table");
+            scrape("https://www.bbc.com/sport/football/spanish-la-liga/table", "La Liga");
             timeout(500);        
 
             console.log("here maybe?");
-            scrape("https://www.bbc.com/sport/football/german-bundesliga/table");
+            scrape("https://www.bbc.com/sport/football/german-bundesliga/table", "German Bundesliga");
             timeout(500);
         }  
     } else {
         console.error("ERROR: unrecognized league name");
     }
 
-    async function scrape(url) {
+    async function scrape(url, leagueResult) {
         await page.goto(url, { waitUntil: "networkidle2"});
         teamsList = await page.$$eval("tr[class*='CellsRow']", rows => {
             return rows.map(row => {
@@ -57,10 +57,10 @@ async function searchStanding(page, obj) {
         const targetTeam = teamsList.find(t => t.name?.toLowerCase() === obj.team.toLowerCase());
 
         if(targetTeam) {
-            console.log(`${obj.team} is currently in position ${targetTeam.rank} on ${obj.league}.`);
+            console.log(`${obj.team} is currently in position ${targetTeam.rank} on ${leagueResult}.`);
             found = true;
         } else {
-            console.log(`${obj.team} is not on ${obj.league}.`);
+            console.log(`${obj.team} is not on ${leagueResult}.`);
         } // no need to close page; index.js does it already
     }
 
