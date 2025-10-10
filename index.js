@@ -29,10 +29,6 @@ program
     .action((teamArg, leagueArg) => {
         const options = program.opts(); // must be after parsing
 
-        // take user value (not the flag), search the value in the map, make const variable for value
-        // league: --league flag
-        // targetLeague: --league three-letter code value that user inputs, key in LeagueList || positional from .command 
-        // leagueName: the value in LeagueList that corresponds with the key (targetLeague) 
         let targetLeague = leagueArg;
         let targetTeam = teamArg;
         
@@ -79,8 +75,6 @@ Options:
     -l, --league <type>                     League tag, must include league name after; optional
     -t, --team <type>                       Team tag, must include team tag after
 
-Team names are three-letter codes of the team. Refer to: https://liaison.reuters.com/tools/sports-team-codes 
-   
 Team Tag examples: 
     bar                     Barcelona
     rma                     Real Madrid
