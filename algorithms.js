@@ -7,7 +7,7 @@ TODO
 
 async function searchStanding(page, obj) {
 
-    if("team" in obj) {
+    if(!("team" in obj)) {
         console.error("ERROR: undefined teamName");
     }
 
