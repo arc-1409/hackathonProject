@@ -23,7 +23,7 @@ program
     .version("1.0.0")
     .name("first-cli")
     .description("test for hackathon: search for team's standing in leagues")
-    .command('search-standing <team> [league]') // switch up order
+    .command('search-standing [team] [league]') // switch up order
     .option("-l, --league <type>", "league name")
     .option("-t, --team <type>", "team name")
     .action((teamArg, leagueArg) => {
