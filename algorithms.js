@@ -38,13 +38,13 @@ async function searchStanding(page, obj) {
         });
     });
 
-    const team = teamsList.find(t => t.name?.toLowerCase() === teamName.toLowerCase());
+    const targetTeam = teamsList.find(t => t.name?.toLowerCase() === obj.team.toLowerCase());
 
-    if(team) {
-        console.log(`${teamName} is currently in position ${team.rank} on ${leagueName}.`);
+    if(targetTeam) {
+        console.log(`${obj.team} is currently in position ${team.rank} on ${obj.league}.`);
     } 
     else {
-        console.log(`${teamName} is not on ${leagueName}.`);
+        console.log(`${obj.team} is not on ${obj.league}.`);
     } // no need to close page; index.js does it already
 }
 
