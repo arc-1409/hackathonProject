@@ -1,14 +1,18 @@
 import puppeteer from "puppeteer";
 
+/*
+TODO
+- optional parameter
+*/
+
 async function searchStanding(page, obj) {
-    obj.league = leagueName || 0; // optional leagueName 
 
     if("team" in obj) {
         console.error("ERROR: undefined teamName");
     }
 
     // filter leagues
-    if(leagueName === "Premier League") {
+    if(obj.team === "Premier League") {
         await page.goto("https://www.bbc.com/sport/football/premier-league/table", { waitUntil: "networkidle2"});
     } else if (leagueName === "La Liga") {
         await page.goto("https://www.bbc.com/sport/football/spanish-la-liga/table", { waitUntil: "networkidle2"});
