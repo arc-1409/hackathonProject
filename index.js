@@ -33,17 +33,16 @@ program
         // league: --league flag
         // targetLeague: --league three-letter code value that user inputs, key in LeagueList || positional from .command 
         // leagueName: the value in LeagueList that corresponds with the key (targetLeague) 
+        const targetLeague = leagueArg;
+        const targetTeam = teamArg;
+        
         if (options.league) {
             targetLeague = options.league;
-        } else {
-            targetLeague = leagueArg;
-        }
+        } 
 
         if (options.team) {
             targetTeam = options.team;
-        } else {
-            targetTeam = teamArg; // args[2] is the positional <team>
-        }
+        } 
         
         const leagueName = leagueList[targetLeague];
         const teamName = teamList[targetTeam];
