@@ -24,12 +24,15 @@ async function searchStanding(page, obj) {
         while (found === false) {
             console.log("should have three undefined?");
             scrape("https://www.bbc.com/sport/football/premier-league/table");
+            timeout(500);
 
             console.log("or is it just stuck here");
             scrape("https://www.bbc.com/sport/football/spanish-la-liga/table");
+            timeout(500);        
 
             console.log("here maybe?");
             scrape("https://www.bbc.com/sport/football/german-bundesliga/table");
+            timeout(500);
         }  
     } else {
         console.error("ERROR: unrecognized league name");
@@ -59,6 +62,12 @@ async function searchStanding(page, obj) {
         } else {
             console.log(`${obj.team} is not on ${obj.league}.`);
         } // no need to close page; index.js does it already
+    }
+
+    // waitForTimeout no longer works: https://github.com/spatie/browsershot/pull/834
+    // https://stackoverflow.com/questions/74806202/how-can-i-add-a-settimeout-delay-to-my-browser-in-puppeteer 
+    function timeout(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 }
 
