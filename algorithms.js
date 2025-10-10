@@ -41,7 +41,7 @@ async function searchStanding(page, obj) {
     const targetTeam = teamsList.find(t => t.name?.toLowerCase() === obj.team.toLowerCase());
 
     if(targetTeam) {
-        console.log(`${obj.team} is currently in position ${team.rank} on ${obj.league}.`);
+        console.log(`${obj.team} is currently in position ${targetTeam.rank} on ${obj.league}.`);
     } 
     else {
         console.log(`${obj.team} is not on ${obj.league}.`);
