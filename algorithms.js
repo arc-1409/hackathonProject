@@ -12,11 +12,11 @@ async function searchStanding(page, obj) {
     }
 
     // filter leagues
-    if(obj.team === "Premier League") {
+    if(obj.league === "Premier League") {
         await page.goto("https://www.bbc.com/sport/football/premier-league/table", { waitUntil: "networkidle2"});
-    } else if (leagueName === "La Liga") {
+    } else if (obj.league === "La Liga") {
         await page.goto("https://www.bbc.com/sport/football/spanish-la-liga/table", { waitUntil: "networkidle2"});
-    } else if (leaguename === "German Bundesliga") {
+    } else if (obj.league === "German Bundesliga") {
         await page.goto("https://www.bbc.com/sport/football/german-bundesliga/table", { waitUntil: "networkidle2"});
     } else {  // for when league isn't specified
         await page.goto("https://www.bbc.com/sport/football/premier-league/table", { waitUntil: "networkidle2"});
