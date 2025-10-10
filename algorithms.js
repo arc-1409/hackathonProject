@@ -15,23 +15,23 @@ async function searchStanding(page, obj) {
 
     // filter leagues
     if(obj.league === "Premier League") {
-        scrape("https://www.bbc.com/sport/football/premier-league/table", obj.league);
+        await scrape("https://www.bbc.com/sport/football/premier-league/table", obj.league);
     } else if (obj.league === "La Liga") {
-        scrape("https://www.bbc.com/sport/football/spanish-la-liga/table", obj.league);
+        await scrape("https://www.bbc.com/sport/football/spanish-la-liga/table", obj.league);
     } else if (obj.league === "German Bundesliga") {
-        scrape("https://www.bbc.com/sport/football/german-bundesliga/table", obj.league);
+        await scrape("https://www.bbc.com/sport/football/german-bundesliga/table", obj.league);
     } else if (!("league" in obj)) {  // for when league isn't specified2
-        scrape("https://www.bbc.com/sport/football/premier-league/table", "Premier League");
+        await scrape("https://www.bbc.com/sport/football/premier-league/table", "Premier League");
         
         // divide each goto into one per if statement to avoid clashing
         if (found === false) {
-            timeout(500);        
-            scrape("https://www.bbc.com/sport/football/spanish-la-liga/table", "La Liga");
+            await timeout(500);        
+            await scrape("https://www.bbc.com/sport/football/spanish-la-liga/table", "La Liga");
         }
 
         if (found === false) {
-            timeout(500);
-            scrape("https://www.bbc.com/sport/football/german-bundesliga/table", "German Bundesliga");
+            await timeout(500);
+            await scrape("https://www.bbc.com/sport/football/german-bundesliga/table", "German Bundesliga");
         }
     } else {
         console.error("ERROR: unrecognized league name");
