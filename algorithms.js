@@ -33,6 +33,10 @@ async function searchStanding(page, obj) {
             await timeout(500);
             await scrape("https://www.bbc.com/sport/football/german-bundesliga/table", "German Bundesliga");
         }
+
+        if (found === false) {
+            console.log(`${obj.team} isn't on Premier League, La Liga, or German Bundesliga.`);
+        }
     } else {
         console.error("ERROR: unrecognized league name");
     }
@@ -58,9 +62,6 @@ async function searchStanding(page, obj) {
         if(targetTeam) {
             console.log(`${obj.team} is currently in position ${targetTeam.rank} on ${leagueResult}.`);
             found = true;
-        } else {
-            console.log(`${obj.team} is not on ${leagueResult}.`);
-        } // no need to close page; index.js does it already
     }
 
     // waitForTimeout no longer works: https://github.com/spatie/browsershot/pull/834
