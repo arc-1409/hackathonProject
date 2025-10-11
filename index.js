@@ -11,7 +11,6 @@ import { leagueList, teamList, positionList } from "./lexicon.js";
 TODO 
 - figure out how/where to store documentation
 - add use case file
-- explore other ascii art (easter egg and/or title)
 - algorithm 2: most recent match result 
 */
 
