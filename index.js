@@ -85,15 +85,6 @@ For more information, visit the GitHub page: https://github.com/arc-1409/Footbal
 
 program.parse(process.argv);
 
-/* error messages
-if (!teamName) {
-    console.log(`ERROR: Unknown team code ${team}`); 
-    process.exit(1); } 
-if (league && !leagueName) {
-    console.log(`Error: Unknown league name ${league}`); 
-    process.exit(1); }
-*/
-
 // main
 async function main(command, obj) {
     // style
