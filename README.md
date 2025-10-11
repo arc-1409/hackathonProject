@@ -64,11 +64,11 @@ node index.js --help
 
 ## 🏁 5 Most Recent Updates
 
-- Resolved bugs in team lookups
 - Added German Bundesliga to the Lexicon
 - Centralized, compressed, and optimized algorithms as well as deleted unneeded folders for cleaner code and file organization
 - Resolved optional parameters passing into algorithms by passing objects instead of object properties individually (10 OCT 25)
 - Alogirhtm now accepts any combination of command arguments and options for user input (10 OCT 25)
+- Explored ASCII art for project title (11 OCT 25)
 
 ## ⏳ Future Features
 
