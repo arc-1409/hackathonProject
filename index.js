@@ -10,7 +10,7 @@ import { leagueList, teamList, positionList } from "./lexicon.js";
 /*
 TODO 
 - figure out how/where to store documentation
-- add use case file
+- add benchmarks file to test web scraping speed
 - algorithm 2: most recent match result 
 */
 
