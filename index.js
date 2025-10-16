@@ -10,7 +10,7 @@ import { leagueList, teamList, positionList } from "./lexicon.js";
 /*
 TODO 
 - figure out how/where to store documentation
-- add benchmarks file to test web scraping speed
+- add benchmarks file to test web scraping speed: https://rbspy.github.io/profiling-guide/benchmarking-your-code.html 
 - algorithm 2: most recent match result 
 */
 
