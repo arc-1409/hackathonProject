@@ -27,6 +27,8 @@ program
     .option("-l, --league <type>", "league name")
     .option("-t, --team <type>", "team name")
     .action((teamArg, leagueArg) => {
+        var start = new Date();
+
         const options = program.opts(); // must be after parsing
 
         let targetLeague = leagueArg;
@@ -123,6 +125,9 @@ async function main(command, obj) {
         }
 
         console.log(horizontal);
+
+        var duration = new Date() - start;
+        console.log("total time elapsed: ", duration, " seconds");
 
         await page.close();
         await browser.close();
