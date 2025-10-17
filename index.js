@@ -27,7 +27,7 @@ program
     .option("-l, --league <type>", "league name")
     .option("-t, --team <type>", "team name")
     .action((teamArg, leagueArg) => {
-        var start = new Date();
+        console.time("benchmark"); // benchmark start
 
         const options = program.opts(); // must be after parsing
 
@@ -128,6 +128,8 @@ async function main(command, obj) {
 
         var duration = new Date() - start;
         console.log("total time elapsed: ", duration, " seconds");
+
+        console.timeEnd("benchmark"); // benchmark end
 
         await page.close();
         await browser.close();
