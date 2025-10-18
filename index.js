@@ -79,6 +79,8 @@ program
             console.error("ERROR: please specify valid team name.");
             process.exit(1);
         }
+
+        const teamName = teamList[targetTeam];
         
         const teamOnly = {
             team: teamName
