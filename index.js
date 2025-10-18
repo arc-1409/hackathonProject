@@ -150,7 +150,7 @@ async function main(command, obj, start) {
                 console.log(`${yellowWord}`); 
             }
         } else if (command === "recent-match") {
-            await 
+            await recentMatch(page, obj);
         }
 
         console.log(horizontal);

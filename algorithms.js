@@ -5,6 +5,7 @@ TODO
 - add recent match result algorithm
 */
 
+// algorithm 1
 async function searchStanding(page, obj) {
     if(!("team" in obj)) {
         console.error("ERROR: undefined teamName");
@@ -69,9 +70,8 @@ async function searchStanding(page, obj) {
     }
 }
 
-export {searchStanding};
-
-async function searchStanding(page, obj) {
+// algorithm 2
+async function recentMatch(page, obj) {
     if(!("team" in obj)) {
         console.error("ERROR: undefined teamName");
     }
@@ -111,7 +111,7 @@ async function searchStanding(page, obj) {
         const targetTeam = teams.find(t => t.name?.toLowerCase() === obj.team.toLowerCase());
 
         if(targetTeam) {
-            console.log(`${obj.team}'s most recent game with /team/ was a ${targetTeam.result}.`);
+            console.log(`${obj.team}'s most recent game at ${leagueResult} with /team/ was a ${targetTeam.result}.`);
             if (result === 'W') {
                 console.log("congratulations!");
             }
@@ -119,9 +119,9 @@ async function searchStanding(page, obj) {
         }  // no need to close page; index.js does it already
     }
 
-    // waitForTimeout no longer works: https://github.com/spatie/browsershot/pull/834
-    // https://stackoverflow.com/questions/74806202/how-can-i-add-a-settimeout-delay-to-my-browser-in-puppeteer 
     async function timeout(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 }
+
+export {searchStanding, recentMatch};
