@@ -43,9 +43,14 @@ program
         } 
 
         if (!targetTeam || !(targetTeam in teamList)) {
-            console.error("Error: please specify valid team name.");
+            console.error("ERROR: please specify valid team name.");
             process.exit(1);
         } 
+
+        if (!(targetLeauge in leagueList)) {
+            console.error("ERROR: please specify valid league name or omit.");
+            process.exit(1);
+        }
 
         const leagueName = leagueList[targetLeague];
         const teamName = teamList[targetTeam];
