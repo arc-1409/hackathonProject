@@ -72,3 +72,11 @@ async function searchStanding(page, obj) {
 }
 
 export {searchStanding};
+
+async function searchStanding(page, obj) {
+    if(!("team" in obj)) {
+        console.error("ERROR: undefined teamName");
+    }
+
+    let found = false;
+}
