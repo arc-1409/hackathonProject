@@ -5,7 +5,7 @@ import puppeteer from "puppeteer";
 import chalk from "chalk";
 import figlet from "figlet";
 import { searchStanding, recentMatch } from "./algorithms.js";
-import { leagueList, teamList, positionList } from "./lexicon.js";
+import { leagueList, teamList, resultList, positionList } from "./lexicon.js";
 
 /*
 TODO 
