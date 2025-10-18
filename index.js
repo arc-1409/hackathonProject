@@ -127,7 +127,7 @@ async function main(command, obj, start) {
         console.log(horizontal);
 
         let duration = (performance.now() - start) / 1000; // benchmark end in seconds instead of milliseconds, per autoq fashion
-        console.log("tiime elapsed: ", duration, " seconds");
+        console.log("tiime elapsed:", duration, "seconds");
 
         console.log(horizontal);
 
