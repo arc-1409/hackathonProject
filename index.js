@@ -56,7 +56,7 @@ program
             league: leagueName,
         }
 
-        main("search-standing", teamLeague); // { leagueName, teamName }
+        main("search-standing", teamLeague, start); // { leagueName, teamName }
     });  
 
 program
@@ -87,7 +87,7 @@ For more information, visit the GitHub page: https://github.com/arc-1409/Footbal
 program.parse(process.argv);
 
 // main
-async function main(command, obj) {
+async function main(command, obj, start) {
     // style
     const terminalWidth = process.stdout.columns;
     const line = "-";
