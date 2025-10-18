@@ -47,7 +47,7 @@ program
             process.exit(1);
         } 
 
-        if (!(targetLeague in leagueList)) {
+        if (targetLeague && !(targetLeague in leagueList)) {
             console.error("ERROR: please specify valid league name or omit.");
             process.exit(1);
         }
