@@ -64,8 +64,6 @@ async function searchStanding(page, obj) {
         }  // no need to close page; index.js does it already
     }
 
-    // waitForTimeout no longer works: https://github.com/spatie/browsershot/pull/834
-    // https://stackoverflow.com/questions/74806202/how-can-i-add-a-settimeout-delay-to-my-browser-in-puppeteer 
     async function timeout(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
@@ -79,4 +77,51 @@ async function searchStanding(page, obj) {
     }
 
     let found = false;
+
+    if (found === false) {
+            await timeout(500);        
+            await scrape("https://www.bbc.com/sport/football/spanish-la-liga/table", "La Liga");
+    }
+
+    if (found === false) {
+        await timeout(500);
+        await scrape("https://www.bbc.com/sport/football/german-bundesliga/table", "German Bundesliga");
+    }
+
+    if (found === false) {
+        console.log(`${obj.team} isn't on Premier League, La Liga, or German Bundesliga.`);
+    }
+
+    async function scrape(url, leagueResult) {
+        await page.goto(url, { waitUntil: "networkidle2"});
+        const teams = await page.$$eval("tr[class*='CellsRow']", rows => {
+            return rows.map(row => {
+                const result = row.querySelector("span.ssrcss-4fgj5b-Rank")?.textContent.trim();
+
+                // Try aria-hidden first, fallback to visually-hidden
+                // fix 2: try visually-hidden, fallback to aria-hidden
+                let name = row.querySelector("span.visually-hidden")?.innerText.trim(); 
+                if (!name) {
+                    name = row.querySelector("span[aria-hidden='true'][data-600]")?.getAttribute("data-600")?.trim();
+                }
+                return { result, name };
+            });
+        });
+
+        const targetTeam = teams.find(t => t.name?.toLowerCase() === obj.team.toLowerCase());
+
+        if(targetTeam) {
+            console.log(`${obj.team}'s most recent game with /team/ was a ${targetTeam.result}.`);
+            if (result === 'W') {
+                console.log("congratulations!");
+            }
+            found = true;
+        }  // no need to close page; index.js does it already
+    }
+
+    // waitForTimeout no longer works: https://github.com/spatie/browsershot/pull/834
+    // https://stackoverflow.com/questions/74806202/how-can-i-add-a-settimeout-delay-to-my-browser-in-puppeteer 
+    async function timeout(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 }
