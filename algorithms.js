@@ -1,4 +1,5 @@
 import puppeteer from "puppeteer";
+import { resultList } from "./lexicon.js";
 
 /*
 TODO
@@ -96,7 +97,9 @@ async function recentMatch(page, obj) {
         await page.goto(url, { waitUntil: "networkidle2"});
         const teams = await page.$$eval("tr[class*='CellsRow']", rows => {
             return rows.map(row => {
-                const result = row.querySelector("span.ssrcss-4fgj5b-Rank")?.textContent.trim();
+                const matches = row.querySelectorAll("div.ssrcss-86dwvw-LetterContainer, div.ssrcss-1xnub2-LetterContainer, div.ssrcss-1d0kmun-letterContainer")?.textContent.trim();
+                const raw = matches[5];
+                const result = resultList[raw];
 
                 // Try aria-hidden first, fallback to visually-hidden
                 // fix 2: try visually-hidden, fallback to aria-hidden
