@@ -126,8 +126,10 @@ async function main(command, obj, start) {
 
         console.log(horizontal);
 
-        let duration = performance.now() - start; // benchmark end
+        let duration = performance.now() - start; // benchmark end, per autoq fashion
         console.log("tiime elapsed: ", duration, " seconds");
+
+        console.log(horizontal);
 
         await page.close();
         await browser.close();
