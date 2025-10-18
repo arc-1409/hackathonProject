@@ -71,6 +71,12 @@ const teamList = {
     wob: "Wolfsburg"
 };
 
+const resultList = {
+    w: "win",
+    d: "draw",
+    l: "lose"
+}
+
 const positionList = {
     st: "striker",
     rw: "right wing",
@@ -91,4 +97,4 @@ const positionList = {
     gk: "goalkeeper"
 };
 
-export { leagueList, teamList, positionList };
+export { leagueList, teamList, resultList, positionList };
