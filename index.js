@@ -23,9 +23,7 @@ program
     .version("1.0.0")
     .name("first-cli")
     .description("test for hackathon: search for team's standing in leagues")
-    .command('search-standing [team] [league]') // switch up order
-    .option("-l, --league <type>", "league name")
-    .option("-t, --team <type>", "team name")
+    .command("search-standing [team] [league]") // switch up order
     .action((teamArg, leagueArg) => {
         let start = performance.now() // benchmark start
 
@@ -58,11 +56,35 @@ program
         // create object to simplify function calling
         const teamLeague = {
             team: teamName,
-            league: leagueName,
+            league: leagueName
         }
 
         main("search-standing", teamLeague, start); // { leagueName, teamName }
     });  
+
+program 
+    .description("search for most recent match's results and opponent")
+    .command("recent-match [team]")
+    .action((teamArg) => {
+        let start = performance.now()
+        const options = program.opts(); 
+
+        let targetTeam = teamArg;
+
+        if (options.team) {
+            targetTeam = options.team;
+        } 
+
+        if (!targetTeam || !(targetTeam in teamList)) {
+            console.error("ERROR: please specify valid team name.");
+            process.exit(1);
+        }
+        
+        const teamOnly = {
+            team: teamName
+        }
+        main("recent-match", teamOnly, start)
+    });
 
 program
     .option("-c, --coach", "head coach") // future feature
