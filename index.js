@@ -42,13 +42,13 @@ program
             targetTeam = options.team;
         } 
 
+        if (!targetTeam || !(targetTeam in teamList)) {
+            console.error("Error: please specify valid team name.");
+            process.exit(1);
+        } 
+
         const leagueName = leagueList[targetLeague];
         const teamName = teamList[targetTeam];
-
-        if (!targetTeam) {
-            console.error("Error: please specify team name.");
-            process.exit(1);
-        }
 
         // create object to simplify function calling
         const teamLeague = {
